@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HEXCORE SKILLBRIDGE — Where Skills Meet Needs.</title>
+<meta name="theme-color" content="#040814">
+<style>
+:root{--bg:#040814;--p:#0a1226;--p2:#0e1a36;--b:#16294f;--tx:#f1f5ff;--mu:#8a9bc0;--bl:#3b82f6;--vi:#8b5cf6;--gr:#10b981;--am:#f59e0b;--rd:#f43f5e}
+*{box-sizing:border-box;margin:0}
+[id]{scroll-margin-top:70px}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5}
+a{color:inherit;text-decoration:none;cursor:pointer}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+h1,h2,h3,h4{font-weight:700;line-height:1.2}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+.logo b{background:linear-gradient(90deg,var(--bl),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hex{width:32px;height:32px;display:grid;place-items:center;background:linear-gradient(135deg,var(--bl),var(--vi));clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);flex:none}
+.btn{border:0;border-radius:10px;padding:10px 18px;font-weight:600;cursor:pointer;background:var(--bl);color:#fff;transition:.2s;display:inline-flex;align-items:center;gap:6px;justify-content:center;min-height:42px}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;filter:none}
+.btn.o{background:transparent;border:1px solid var(--b);color:var(--tx)}
+.btn.g{background:rgba(16,185,129,.15);color:var(--gr)}.btn.r{background:rgba(244,63,94,.15);color:var(--rd)}
+.btn.s{padding:6px 12px;min-height:36px;font-size:14px}
+.back{display:none}
+.card{background:var(--p);border:1px solid var(--b);border-radius:16px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.split{grid-template-columns:2fr 1.2fr}.split2{grid-template-columns:1fr 1.2fr}.split3{grid-template-columns:2fr 1fr}.setgrid{grid-template-columns:220px 1fr}
+.row{display:flex;gap:12px;align-items:center}.sp{justify-content:space-between}.wrap{flex-wrap:wrap}
+.mu{color:var(--mu);font-size:14px}.bl{color:#60a5fa}
+.av{border-radius:50%;display:grid;place-items:center;font-weight:700;flex:none;color:#fff;position:relative}
+.dot{position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:var(--gr);border:2px solid var(--p)}
+.tag{display:inline-block;background:rgba(59,130,246,.15);border:1px solid var(--b);color:#93c5fd;border-radius:6px;padding:2px 8px;font-size:12px;margin:0 4px 4px 0}
+.tag.v{background:rgba(139,92,246,.15);color:#c4b5fd}
+.pill{border-radius:99px;padding:2px 10px;font-size:12px;font-weight:600;border:1px solid transparent;white-space:nowrap}
+.pill.ok{color:var(--gr);background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4)}
+.pill.bz{color:var(--am);background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4)}
+.pill.no{color:var(--rd);background:rgba(244,63,94,.12);border-color:rgba(244,63,94,.4)}
+.pill.dr{color:var(--mu);background:var(--p2);border-color:var(--b)}
+input,select,textarea{width:100%;background:var(--p2);border:1px solid var(--b);border-radius:10px;padding:11px 14px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--bl);box-shadow:0 0 0 3px rgba(59,130,246,.2)}
+select option{background:#0e1a36}
+label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}
+.err{color:var(--rd);font-size:13px;margin-top:4px}
+.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:14px 5%;background:rgba(4,8,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--b)}
+.nav .links{display:flex;gap:26px;color:var(--mu);font-size:15px}.nav .links a:hover{color:#fff}
+.burger{display:none;background:none;border:1px solid var(--b);border-radius:10px;width:42px;height:42px;font-size:20px;cursor:pointer}
+.mmenu{display:none}
+.sec{padding:70px 5%}.sec h2{font-size:32px;text-align:center;margin-bottom:8px}.sec>p{text-align:center;color:var(--mu);margin-bottom:36px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:80px 5%;background:radial-gradient(circle at 80% 20%,rgba(139,92,246,.25),transparent 50%),radial-gradient(circle at 10% 80%,rgba(59,130,246,.2),transparent 50%)}
+.hero h1{font-size:clamp(36px,5vw,60px);margin:12px 0 16px}.hero h1 b{background:linear-gradient(90deg,var(--bl),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mu);font-size:18px;margin-bottom:28px;max-width:520px}
+.cat{text-align:center;cursor:pointer;transition:.2s}.cat:hover{transform:translateY(-4px);border-color:var(--bl)}
+.ico{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:rgba(59,130,246,.15);margin-bottom:12px}
+.cat .ico{margin:0 auto 10px}
+.light{background:#f4f7ff;color:#0b1330}.light .card{background:#fff;border-color:#dbe4ff;color:#0b1330;box-shadow:0 8px 24px rgba(30,60,140,.08)}.light .card p,.light>p{color:#51608a!important}
+footer{padding:50px 5% 30px;border-top:1px solid var(--b);color:var(--mu)}
+.fcols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px}
+footer h4{color:var(--tx);margin-bottom:12px}footer .fl{display:block;padding:5px 0;color:var(--mu)}footer .fl:hover{color:#fff}
+.fbot{margin-top:30px;padding-top:18px;border-top:1px solid var(--b);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pubp{max-width:860px;margin:0 auto;padding:60px 5%}.pubp h1{font-size:36px;margin-bottom:8px}.pubp h2{margin-top:26px;font-size:20px}.pubp p{color:var(--mu);margin:10px 0}
+details.faq{background:var(--p);border:1px solid var(--b);border-radius:12px;padding:14px 18px;margin-bottom:10px}details.faq summary{cursor:pointer;font-weight:600}details.faq p{margin:10px 0 0}
+.auth{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 70% 10%,rgba(139,92,246,.25),transparent 50%)}
+.auth .card{width:100%;max-width:460px;padding:32px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg button{padding:10px 6px;border-radius:10px;border:1px solid var(--b);background:var(--p2);cursor:pointer;font-size:14px;min-height:44px}
+.seg button.on{border-color:var(--bl);background:rgba(59,130,246,.25);color:#93c5fd;font-weight:700}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.app.col{grid-template-columns:76px 1fr}
+.side{background:#050b1c;border-right:1px solid var(--b);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.side a,.side .nl{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--mu);font-size:15px;cursor:pointer}
+.side a:hover{background:var(--p2);color:#fff}.side a.on{background:rgba(59,130,246,.18);color:#60a5fa;font-weight:600}
+.col .lbl,.col .uinfo,.col .badge,.col .lt{display:none}.col .side a{justify-content:center}.col .side .logo{justify-content:center}
+.badge{margin-left:auto;background:var(--vi);color:#fff;border-radius:99px;font-size:12px;min-width:22px;text-align:center;padding:1px 7px}.badge.b{background:var(--bl)}
+.main{padding:32px;max-width:1200px;width:100%}
+.stat{display:flex;flex-direction:column;gap:6px}.stat h2{font-size:30px}
+.item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--b)}.item:last-child{border:0}
+.bar{height:8px;background:var(--p2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bl),var(--vi))}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{padding:8px 14px;border-radius:99px;border:1px solid var(--b);background:var(--p);cursor:pointer;font-size:14px}.chip.on{background:var(--bl);border-color:var(--bl)}
+.msgs{display:grid;grid-template-columns:320px 1fr;height:calc(100vh - 150px);min-height:480px;padding:0;overflow:hidden}
+.conv{border-right:1px solid var(--b);overflow:auto}.conv .item{padding:14px 16px;cursor:pointer}.conv .item.on{background:var(--p2)}
+.chat{display:flex;flex-direction:column;min-width:0}.chat .log{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:70%;padding:10px 14px;border-radius:14px;background:var(--p2);border:1px solid var(--b);word-wrap:break-word}.bub.me{align-self:flex-end;background:linear-gradient(135deg,var(--bl),var(--vi));border:0}
+.bub small{display:block;opacity:.6;font-size:11px;margin-top:2px}
+.star{font-size:28px;cursor:pointer;color:#34476f;padding:0 2px}.star.on{color:var(--am)}
+.tbl{width:100%;border-collapse:collapse}.tbl th,.tbl td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--b);font-size:14px}.tbl th{color:var(--mu)}
+.tblw{overflow:auto}
+.toast{position:fixed;top:20px;right:20px;z-index:99;background:var(--p2);border:1px solid var(--bl);padding:12px 18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:in .3s;max-width:calc(100vw - 40px)}
+.toast.e{border-color:var(--rd)}@keyframes in{from{opacity:0;transform:translateY(-10px)}}
+.empty{text-align:center;padding:40px;color:var(--mu)}
+.bnav,.amob{display:none}
+.spin{width:28px;height:28px;border:3px solid var(--b);border-top-color:var(--bl);border-radius:50%;animation:sp .7s linear infinite;margin:40px auto}@keyframes sp{to{transform:rotate(360deg)}}
+.modal{position:fixed;inset:0;background:rgba(2,5,14,.75);display:grid;place-items:center;z-index:50;padding:16px}
+.modal .card{width:100%;max-width:460px;max-height:90vh;overflow:auto}
+.modal.sheet{align-items:end;padding:0}.modal.sheet .card{max-width:100%;border-radius:20px 20px 0 0}
+.plan ul{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px;color:var(--mu);font-size:14px}
+.plan.hot{border-color:var(--vi);box-shadow:0 0 0 1px var(--vi),0 8px 30px rgba(139,92,246,.25)}
+.tog{position:relative;width:46px;height:26px;flex:none}
+.tog input{opacity:0;position:absolute;inset:0;width:100%;height:100%;cursor:pointer;margin:0;padding:0}
+.tog i{position:absolute;inset:0;background:var(--b);border-radius:99px;transition:.2s;pointer-events:none}
+.tog i:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.tog input:checked+i{background:var(--bl)}.tog input:checked+i:after{left:23px}
+.tgl{display:flex;margin:0;padding:14px 0;border-bottom:1px solid var(--b);font-weight:400;gap:16px;align-items:center;justify-content:space-between}
+.dist{display:grid;grid-template-columns:16px 1fr 22px;gap:8px;align-items:center;font-size:13px}
+.tile{aspect-ratio:4/3;border-radius:12px;display:grid;place-items:center;font-size:32px}
+.tabs a{display:block;padding:10px 12px;border-radius:10px;color:var(--mu);cursor:pointer}.tabs a.on{background:var(--bl);color:#fff;font-weight:600}
+@media(max-width:900px){
+.g3,.g4,.g5{grid-template-columns:repeat(2,1fr)}.split,.split2,.split3,.setgrid{grid-template-columns:1fr}
+.hero{grid-template-columns:1fr}.nav .links{display:none}.burger{display:block}.fcols{grid-template-columns:1fr 1fr}
+.mmenu.open{display:grid;gap:4px;position:absolute;top:100%;left:0;right:0;background:#050b1c;border-bottom:1px solid var(--b);padding:12px 5%}
+.mmenu a{padding:12px;border-radius:10px}.mmenu a:hover{background:var(--p2)}
+.msgs{grid-template-columns:1fr;height:calc(100vh - 240px)}.conv.hide,.chat.hide{display:none}.back{display:inline-flex}}
+@media(max-width:800px){.app,.app.col{grid-template-columns:1fr}.side{display:none}.main{padding:18px 16px 96px}.fcols{grid-template-columns:1fr}
+.bnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#050b1c;border-top:1px solid var(--b);z-index:30;justify-content:space-around;padding:6px 0 8px}
+.bnav a{display:flex;flex-direction:column;align-items:center;font-size:11px;color:var(--mu);padding:6px 10px;min-width:56px;cursor:pointer}.bnav a.on{color:#60a5fa}.bnav span{font-size:20px}
+.amob{display:flex;overflow-x:auto;gap:8px;padding:12px 16px;position:sticky;top:0;background:var(--bg);z-index:10;border-bottom:1px solid var(--b)}.amob .chip{white-space:nowrap;margin:0}
+.g2,.g3,.g4,.g5{grid-template-columns:1fr}.g4.keep{grid-template-columns:repeat(2,1fr)}.sec{padding:50px 5%}.toast{left:20px}}
+@media(max-width:600px){.nav .cta{display:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.12)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,185,129,.55)}100%{box-shadow:0 0 0 10px rgba(16,185,129,0)}}
+body{background:radial-gradient(1100px 560px at 85% -10%,rgba(139,92,246,.14),transparent 60%),radial-gradient(900px 500px at -10% 105%,rgba(59,130,246,.12),transparent 60%),var(--bg);background-attachment:fixed}
+#root.enter>*{animation:fadeUp .45s ease both}
+.gt{background:linear-gradient(90deg,var(--bl),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{background:linear-gradient(135deg,#3b82f6,#7c5cf6);box-shadow:0 6px 18px rgba(59,130,246,.3)}
+.btn.o,.btn.g,.btn.r{box-shadow:none}.btn.o{background:transparent}.btn.o:hover{border-color:var(--bl);background:rgba(59,130,246,.08)}
+.btn.lg{padding:14px 26px;font-size:16px;min-height:50px;border-radius:12px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)),var(--p)}
+.hv{position:relative;transition:transform .25s,border-color .25s,box-shadow .25s}
+.hv:hover{transform:translateY(-4px);border-color:rgba(96,165,250,.55);box-shadow:0 16px 40px rgba(59,130,246,.18)}
+.light .card.hv:hover{box-shadow:0 16px 40px rgba(59,130,246,.2)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}.rv.in{opacity:1;transform:none}
+.ico.c0,.sico.c0{background:rgba(59,130,246,.18)}.ico.c1,.sico.c1{background:rgba(139,92,246,.2)}.ico.c2,.sico.c2{background:rgba(16,185,129,.18)}.ico.c3,.sico.c3{background:rgba(245,158,11,.2)}
+.sico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:20px;margin-bottom:6px}
+.snum{position:absolute;top:14px;right:16px;font-size:34px;font-weight:800;color:rgba(148,163,184,.18)}
+.av{box-shadow:0 0 0 2px rgba(96,165,250,.28)}.dot{animation:pulse 2s infinite}
+.side a.on{box-shadow:inset 3px 0 0 var(--bl)}.side .logo{font-size:13.5px;gap:8px}.side .lt{white-space:nowrap}
+.pill.ok{box-shadow:0 0 12px rgba(16,185,129,.12)}
+.plan.hot{background:linear-gradient(180deg,rgba(139,92,246,.14),var(--p))}
+.toast{top:auto;bottom:24px;right:24px}
+.hero{position:relative;overflow:hidden;padding:90px 5% 80px}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 40%,#000 25%,transparent 75%);mask-image:radial-gradient(circle at 50% 40%,#000 25%,transparent 75%)}
+.hero>*{position:relative;z-index:1}.hero>.orb{position:absolute;z-index:0}
+.orb{border-radius:50%;filter:blur(80px);opacity:.45;pointer-events:none;animation:drift 12s ease-in-out infinite}
+.o1{width:340px;height:340px;background:#3b82f6;left:-90px;top:-70px}.o2{width:320px;height:320px;background:#8b5cf6;right:-70px;bottom:-90px;animation-delay:-5s}
+.badge-hero{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(59,130,246,.12);border:1px solid rgba(96,165,250,.35);color:#93c5fd;font-size:13px;font-weight:600}
+.badge-hero i{width:8px;height:8px;border-radius:50%;background:var(--gr);animation:pulse 1.6s infinite}
+.hstats{display:flex;gap:34px;margin-top:36px;flex-wrap:wrap}.hstats b{display:block;font-size:30px;line-height:1.1}
+.hvis{position:relative;height:390px}.net{position:absolute;inset:0;width:100%;height:100%}
+.fcard{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(14,26,54,.82);border:1px solid var(--b);backdrop-filter:blur(8px);border-radius:14px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.45);animation:floaty 5s ease-in-out infinite;white-space:nowrap}
+.fc1{top:4%;left:0}.fc2{top:36%;right:0;animation-delay:-1.5s;font-weight:600}.fc3{bottom:4%;left:6%;animation-delay:-3s}.fc4{bottom:24%;right:4%;animation-delay:-2.2s;font-size:14px;font-weight:600}
+.stack{display:inline-flex}.stack .av{margin-left:-8px;border:2px solid var(--p)}.stack .av:first-child{margin-left:0}
+.banner{max-width:1100px;margin:0 auto;border-radius:24px;padding:52px 28px;text-align:center;background:linear-gradient(135deg,rgba(59,130,246,.35),rgba(139,92,246,.35));border:1px solid rgba(147,197,253,.3);box-shadow:0 20px 60px rgba(59,130,246,.15)}
+.banner h2{margin-bottom:0!important}
+.auth{position:relative;overflow:hidden}
+.auth:before,.auth:after{content:"";position:absolute;width:380px;height:380px;border-radius:50%;filter:blur(90px);opacity:.33;animation:drift 14s ease-in-out infinite;pointer-events:none}
+.auth:before{background:var(--bl);left:-100px;top:-80px}.auth:after{background:var(--vi);right:-100px;bottom:-100px;animation-delay:-6s}
+.auth>*{position:relative;z-index:1}
+.auth .card{background:rgba(10,18,38,.84);backdrop-filter:blur(14px);box-shadow:0 24px 70px rgba(0,0,0,.55)}
+.auth .card.wide{max-width:620px}.auth .card.wiz{max-width:620px;padding:30px}
+.pwwrap{position:relative}.pwwrap input{padding-right:40px}.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;opacity:.6;user-select:none}.eye:hover{opacity:1}
+.meter{height:6px;background:var(--p2);border-radius:9px;margin-top:12px;overflow:hidden}.meter i{display:block;height:100%;width:0;border-radius:9px;transition:.3s}
+.acct{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:12px!important;height:auto}
+.acct span{font-size:20px}.acct small{color:var(--mu);font-size:11px;font-weight:400;line-height:1.3}
+.steps{display:flex;gap:8px;margin-bottom:12px}.stp{flex:1;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mu)}
+.stp span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--p2);border:1px solid var(--b);font-weight:700;flex:none}
+.stp.on{color:#fff;font-weight:600}.stp.on span{background:linear-gradient(135deg,var(--bl),var(--vi));border:0}.stp.ok span{background:var(--gr);border:0;color:#fff}
+.avwrap{position:relative;width:96px;margin:16px auto 14px}.camb{position:absolute;right:-4px;bottom:-2px;width:32px;height:32px;border-radius:50%;background:var(--bl);display:grid;place-items:center;cursor:pointer;border:3px solid var(--p);font-size:14px}
+.opts2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.opt{text-align:left;padding:14px;border-radius:12px;border:1px solid var(--b);background:var(--p2);cursor:pointer;transition:.2s}
+.opt:hover{border-color:rgba(96,165,250,.6)}.opt.on{border-color:var(--bl);background:rgba(59,130,246,.2);box-shadow:0 0 0 1px var(--bl)}
+.opt b{display:block}.opt small{color:var(--mu)}
+.pv{margin-top:18px;background:var(--p2);border:1px solid var(--b);border-radius:14px;padding:16px}
+.almost{display:flex;gap:12px;align-items:center;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.35);color:var(--gr);font-size:14px}
+@media(max-width:900px){.hvis{height:330px}.fc4{display:none}.hero{padding:60px 5%}}
+@media(max-width:800px){.main h1{font-size:24px}.toast{bottom:84px;left:16px;right:16px}.opts2{grid-template-columns:1fr}.stp{font-size:0}.stp span{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="toasts" aria-live="polite"></div>
+<noscript><p style="padding:40px;text-align:center">JavaScript is required to run SkillBridge.</p></noscript>
+
+<script>
+/* ============ 1. HELPERS ============ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const root = $('#root');
+const TODAY = '2026-10-16';
+
+const hue = s => [...s].reduce((a,c) => a + c.charCodeAt(0), 0) % 360;
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const av = (n, z=44, on) => `<span class="av" style="width:${z}px;height:${z}px;font-size:${z/2.6}px;background:linear-gradient(135deg,hsl(${hue(n)} 65% 50%),hsl(${hue(n)+50} 65% 38%))">${esc(n.split(' ').map(w => w[0] || '').slice(0,2).join(''))}${on ? '<i class="dot"></i>' : ''}</span>`;
+const uavIn = z => S.user.photo ? `<img src="${S.user.photo}" alt="" style="width:${z}px;height:${z}px;border-radius:50%;object-fit:cover">` : av(S.user.name, z);
+const uav = z => `<span data-uav="${z}" style="display:inline-flex;flex:none">${uavIn(z)}</span>`;
+const money = n => 'KES ' + Number(n).toLocaleString('en-KE');
+const stars = n => '★'.repeat(n) + '☆'.repeat(5-n);
+
+const HEX = `<span class="hex"><svg viewBox="0 0 24 24" width="16" height="16"><g stroke="#fff" stroke-width="1.6" fill="#fff"><circle cx="6" cy="8" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="17" r="2"/><path d="M6 8L18 8M6 8L12 17M18 8L12 17" fill="none"/></g></svg></span>`;
+
+const CATS = [
+  ['Technology','💻'],['Creative & Design','🎨'],['Business & Finance','📊'],
+  ['Education & Training','🎓'],['Construction','🏗'],['Beauty & Wellness','✨'],
+  ['Agriculture','🌱'],['Transport & Logistics','🚚'],['Professional Services','💼'],
+  ['Home Services','🏠'],['Arts & Entertainment','🎭'],['Other','◎']
+];
+
+const PLANS = {
+  std: {n: 'Connection Fee', a: 2500, perks: ['Send 1 connection request','Message after acceptance','Standard profile visibility']},
+};
+
+const RV = [
+  ['Faith Akinyi',5,'Delivered exactly what I asked for, on time.'],
+  ['James Mutua',5,'Very professional and easy to communicate with.'],
+  ['Brian Otieno',4,'Good quality work. Would hire again.'],
+  ['Mary Atieno',5,'Went above and beyond. Highly recommended.']
+];
+
+const OTYPES = ['Freelance Project','Short-term Task','Contract','Part-time','Community Project','Service Request'];
+
+/* ============ 2. STATE ============ */
+const S = {
+  user: {name: 'Welcome', email: 'amina@example.com', loc: 'Nairobi, Kenya', phone: '+254 759958634', bio: 'Digital marketing specialist and graphic designer with 5 years experience helping brands grow online.', role: 'Both', photo: '', website: '', exp: '5 years', edu: '', comm: 'SkillBridge Messages', joined: '2026-01-12'},
+  prefs: {phoneConn: 1, searchable: 1, online: 1, msgAny: 0, nReq: 1, nMsg: 1, nOpp: 1, nRev: 1, nEmail: 1},
+  aprefs: {reg: 1, verify: 0, maint: 0},
+  
+  P: [
+    {id: 1, n: 'John Mwangi', s: 'Graphic Designer', l: 'Embu, Kenya', x: 3, rate: 'KES 2,500/hr', a: 1, rt: 4.8, rc: 24, c: 'Creative & Design', ty: 'Both', cn: 61, jb: 48, t: ['Graphic Design','Branding','Adobe Illustrator'], d: 'Professional graphic design and branding services. I create logos, marketing materials and digital content that help your business stand out.', o: 1},
+    {id: 2, n: 'Grace Wanjiku', s: 'Web Developer', l: 'Meru, Kenya', x: 5, rate: 'KES 4,000/hr', a: 1, rt: 4.9, rc: 38, c: 'Technology', ty: 'Remote', cn: 94, jb: 72, t: ['React','Node.js','TypeScript','Web Design'], d: 'Full-stack web developer building fast, modern and scalable web applications for businesses of all sizes.', o: 0},
+    {id: 3, n: 'Daniel Ochieng', s: 'Electrician', l: 'Kisumu, Kenya', x: 8, rate: 'KES 1,500/hr', a: 0, rt: 4.7, rc: 56, c: 'Construction', ty: 'On-site', cn: 120, jb: 210, t: ['Electrical Installation','Maintenance','Solar Systems'], d: 'Licensed electrician providing residential and commercial electrical installations, repairs and maintenance.', o: 0},
+    {id: 4, n: 'Sarah Njeri', s: 'Digital Marketer', l: 'Mombasa, Kenya', x: 4, rate: 'KES 3,000/hr', a: 1, rt: 4.6, rc: 19, c: 'Business & Finance', ty: 'Remote', cn: 45, jb: 33, t: ['Social Media','SEO','Google Ads'], d: 'Social media strategist and digital marketing expert helping businesses grow their online presence.', o: 1},
+    {id: 5, n: 'Peter Kamau', s: 'Plumber', l: 'Nakuru, Kenya', x: 6, rate: 'KES 1,200/hr', a: 1, rt: 4.5, rc: 41, c: 'Home Services', ty: 'On-site', cn: 88, jb: 150, t: ['Plumbing','Pipe Fitting','Maintenance'], d: 'Professional plumbing services for residential and commercial properties. Emergency repairs available.', o: 1},
+    {id: 6, n: 'Faith Akinyi', s: 'Hair Stylist', l: 'Kakamega, Kenya', x: 7, rate: 'KES 800/hr', a: 1, rt: 4.9, rc: 73, c: 'Beauty & Wellness', ty: 'On-site', cn: 150, jb: 400, t: ['Natural Hair','Braiding','Weaves'], d: 'Professional hair stylist specializing in natural hair care, braiding, weaves and modern styles. Mobile services available.', o: 1},
+    {id: 7, n: 'James Mutua', s: 'Mathematics Tutor', l: 'Machakos, Kenya', x: 4, rate: 'KES 1,000/hr', a: 1, rt: 4.8, rc: 31, c: 'Education & Training', ty: 'Both', cn: 52, jb: 90, t: ['Mathematics','Physics','Statistics'], d: 'Experienced mathematics and physics tutor for secondary and university students. Online and in-person.', o: 1},
+    {id: 8, n: 'Mary Atieno', s: 'Photographer', l: 'Eldoret, Kenya', x: 5, rate: 'KES 5,000/session', a: 0, rt: 4.7, rc: 45, c: 'Arts & Entertainment', ty: 'On-site', cn: 77, jb: 130, t: ['Photography','Photo Editing','Videography'], d: 'Professional photographer for weddings, events, portraits and commercial photography.', o: 0}
+  ],
+  
+  conns: [1, 2, 7],
+  cdate: {1: '2026-10-02', 2: '2026-09-28', 7: '2026-10-05'},
+  inc: [
+    {id: 5, m: 'Hi! I saw your graphic design profile and I have a project I would like to discuss with you. Looking forward to connecting!', d: '2026-10-11'},
+    {id: 8, m: 'Hello! I need help with marketing materials for my photography business. Would love to connect and discuss collaboration.', d: '2026-10-08'}
+  ],
+  sent: [{id: 3, m: 'Hi Daniel, I need electrical work done at my office.', d: '2026-10-12'}],
+  svc: [],
+  
+  skills: [
+    {id: 1, t: 'Digital Marketing & Social Media', c: 'Business & Finance', d: 'Social media management, paid ads and SEO to help growing brands reach more customers.', ty: 'Remote', exp: '5+ years', loc: 'Nairobi, Kenya', av: 'Available', rate: 'KES 15,000/month', ct: 'SkillBridge Messages', v: 147, r: 8, st: 'Active'},
+    {id: 2, t: 'Graphic Design & Branding', c: 'Creative & Design', d: 'Logos, brand identity and marketing material design for businesses and communities.', ty: 'Remote', exp: '3-5 years', loc: 'Nairobi, Kenya', av: 'Available', rate: 'KES 2,500/hr', ct: 'Any', v: 89, r: 5, st: 'Active'}
+  ],
+  
+  opps: [
+    {id: 1, t: 'Website Redesign for NGO', o: 'Hope Foundation Kenya', s: 'Web Development', k: 'Freelance Project', l: 'Nairobi (Remote)', dl: '2026-11-15', pay: 'KES 80,000', d: 'Redesign our NGO website to be modern, accessible and mobile-friendly. Includes CMS setup and training.', st: 'Open'},
+    {id: 2, t: 'Photography for Community Event', o: 'Embu County Sports', s: 'Photography', k: 'Short-term Task', l: 'Embu, Kenya', dl: '2026-11-02', pay: 'KES 15,000', d: 'Cover our annual community sports day with photos delivered within 3 days.', st: 'Open'},
+    {id: 3, t: 'Digital Marketing Campaign', o: 'Savanna Foods Ltd', s: 'Digital Marketing', k: 'Contract', l: 'Mombasa / Remote', dl: '2026-11-01', pay: 'KES 45,000/month', d: 'Run social media and ads for our new product line over 3 months.', st: 'Open'},
+    {id: 4, t: 'Mathematics Tutoring — Form 4 Student', o: 'Private Family', s: 'Tutoring', k: 'Part-time', l: 'Nakuru, Kenya', dl: '2026-10-30', pay: 'KES 8,000/month', d: 'Weekly evening sessions preparing for KCSE mathematics.', st: 'Open'},
+    {id: 5, t: 'Construction Site Supervisor', o: 'BuildRight Construction', s: 'Construction Management', k: 'Contract', l: 'Kisumu, Kenya', dl: '2026-11-10', pay: 'KES 60,000/month', d: 'Supervise residential site works for a 6 month project.', st: 'Open'},
+    {id: 6, t: 'Logo and Brand Identity Design', o: 'TechStart Nairobi', s: 'Graphic Design', k: 'Freelance Project', l: 'Remote', dl: '2026-11-05', pay: 'KES 25,000', d: 'Create a complete brand identity for a fintech startup.', st: 'Open'}
+  ],
+  
+  applied: [],
+  selOpp: null,
+  oq: '',
+  ot: 'All',
+  
+  notes: [
+    {i: '👥', m: 'Peter Kamau sent you a connection request.', w: '2 hours ago', n: 1, l: '#/app/requests'},
+    {i: '💬', m: 'Grace Wanjiku sent you a new message.', w: '5 hours ago', n: 1, l: '#/app/messages'},
+    {i: '👁', m: 'Someone viewed your Graphic Design skill listing.', w: '1 day ago', n: 1, l: '#/app/myskills'},
+    {i: '💼', m: 'New opportunity matches your skills: "Logo and Brand Identity Design".', w: '1 day ago', l: '#/app/opportunities'},
+    {i: '✓', m: 'James Mutua accepted your connection request.', w: '2 days ago', l: '#/app/connections'},
+    {i: '★', m: 'You received a 5-star review from John Mwangi.', w: '3 days ago', l: '#/app/reviews'},
+    {i: '👁', m: 'Your profile was viewed 12 times this week.', w: '4 days ago', l: '#/app/settings'}
+  ],
+  
+  chats: {
+    1: [['t','Hi Amina! I saw your digital marketing profile. I need help promoting my design business.','10:15 AM'],['m','Hello John! Thanks for reaching out. What kind of promotion are you looking for?','10:18 AM'],['t','Mainly social media — Instagram and Facebook. I also want to improve my Google ranking.','10:22 AM'],['m','Perfect! I can handle both. My social media packages start at KES 15,000/month.','10:25 AM'],['t','That sounds great! I can start next week.','10:32 AM']],
+    2: [['t','I will send the quote by tomorrow.','Yesterday']],
+    7: [['t','No problem, see you then!','Mon']]
+  },
+  
+  unread: {1: 2, 2: 0, 7: 0},
+  chat: 1,
+  mchat: false,
+  mq: '',
+  
+  reviews: [
+    {n: 'John Mwangi', d: '2026-09-20', s: 'Digital Marketing', r: 5, t: 'Amina is incredibly talented and professional. She completely transformed my social media presence.'},
+    {n: 'Faith Akinyi', d: '2026-09-05', s: 'Graphic Design', r: 5, t: 'Excellent graphic design work. She understood exactly what I needed.'},
+    {n: 'James Mutua', d: '2026-08-18', s: 'Digital Marketing', r: 4, t: 'Great work on our marketing campaign. Communication was smooth.'}
+  ],
+  given: [],
+  rtab: 'in',
+  
+  q: '',
+  cat: 'All',
+  avail: '',
+  loc: '',
+  sort: 'rel',
+  exp: '',
+  sty: '',
+  fo: false,
+  tab: 'in',
+  star: 0,
+  portfolio: false,
+  signRole: 'Both',
+  cq: '',
+  collapsed: false,
+  stab: 'profile',
+  modal: null,
+  
+  fees: {std: 2, prem: 1, hist: [{d: '2026-10-02', p: 'Connection Fee', a: 2500, ref: 'SB4K9X2', st: 'Paid'}, {d: '2026-09-18', p: 'Premium Connection', a: 4000, ref: 'SB7M1QZ', st: 'Paid'}]},
+  
+  allPay: [
+    {u: 'Amina Hassan', p: 'Connection Fee', a: 2500, d: '2026-10-02', ref: 'SB4K9X2'},
+    {u: 'Amina Hassan', p: 'Connection Fee', a: 4000, d: '2026-09-18', ref: 'SB7M1QZ'},
+    {u: 'Grace Wanjiku', p: 'Connection Fee', a: 2500, d: '2026-10-05', ref: 'SB2P8LD'},
+    {u: 'Peter Kamau', p: 'Premium Connection', a: 4000, d: '2026-10-09', ref: 'SB9T3WN'}
+  ],
+  
+  users: [
+    {n: 'Amina Hassan', l: 'Nairobi', r: 'Both', s: 'Active', j: '2026-01-12'},
+    {n: 'John Mwangi', l: 'Embu', r: 'Provider', s: 'Active', j: '2026-02-03'},
+    {n: 'Grace Wanjiku', l: 'Meru', r: 'Provider', s: 'Active', j: '2026-02-20'},
+    {n: 'Peter Kamau', l: 'Nakuru', r: 'Provider', s: 'Active', j: '2026-03-14'},
+    {n: 'Brian Otieno', l: 'Kisumu', r: 'Seeker', s: 'Suspended', j: '2026-05-01'}
+  ],
+  us: '',
+  
+  adminSkills: [
+    {id: 101, t: 'Web Development', o: 'Grace Wanjiku', c: 'Technology', st: 'Active'},
+    {id: 102, t: 'Easy money fast', o: 'Brian Otieno', c: 'Other', st: 'Active'},
+    {id: 103, t: 'Plumbing Services', o: 'Peter Kamau', c: 'Home Services', st: 'Active'},
+    {id: 104, t: 'Natural Hair & Braiding', o: 'Faith Akinyi', c: 'Beauty & Wellness', st: 'Active'}
+  ],
+  
+  reports: [
+    {id: 1, w: 'Brian Otieno', ty: 'User', why: 'Spam messages', by: 'Faith Akinyi', d: '2026-10-12', st: 'Open', det: 'Sent repeated unsolicited messages offering "quick loans".'},
+    {id: 2, w: 'Listing: "Easy money fast"', ty: 'Content', why: 'Misleading content', by: 'James Mutua', d: '2026-10-14', st: 'Open', det: 'The listing promises guaranteed income with no details of the service.'}
+  ],
+  
+  flagged: [
+    {id: 1, f: 'Brian Otieno', t: 'Faith Akinyi', m: 'Send me your M-Pesa PIN to get a job.', why: 'Scam attempt', st: 'Open'},
+    {id: 2, f: 'Unknown User', t: 'James Mutua', m: 'Click this link to win money now!', why: 'Spam', st: 'Open'}
+  ],
+  
+  areq: [
+    {f: 'James Mutua', t: 'Sarah Njeri', d: '2026-10-10', st: 'Accepted'},
+    {f: 'Faith Akinyi', t: 'Daniel Ochieng', d: '2026-10-12', st: 'Pending'},
+    {f: 'Mary Atieno', t: 'Grace Wanjiku', d: '2026-10-14', st: 'Rejected'}
+  ],
+  
+  aconn: [
+    {a: 'James Mutua', b: 'Sarah Njeri', d: '2026-10-10'},
+    {a: 'Grace Wanjiku', b: 'John Mwangi', d: '2026-09-30'},
+    {a: 'Peter Kamau', b: 'Mary Atieno', d: '2026-10-03'}
+  ],
+  
+  cats: CATS.map(c => c[0]),
+  adminTab: 'dash',
+  admin: false,
+  logged: false,
+  
+  // Wizard state
+  step: 1,
+  wiz: {bio: '', comm: 'Email', skills: '', exp: '1-3 years', edu: '', pf: '', avail: 'Full Time'}
+};
+
+const BLOG = [
+  ['How to price your skills in Kenya','2026-10-02','Pricing is the hardest part of offering a skill. Start by researching what similar providers charge, then decide whether to charge per hour, per project or per session. Be clear about what is included, and review your rates every few months as your reviews grow.'],
+  ['5 tips for a profile that gets noticed','2026-09-21','Use a clear photo, write a short bio that says who you help and how, list your three strongest skills first, and add real portfolio samples. Profiles with reviews and an active availability status get far more connection requests.'],
+  ['Staying safe when you work with new people','2026-09-08','Keep conversations on SkillBridge until you trust the other person. Never share passwords, PINs or card numbers. Agree scope and payment before work starts, and use the Report button if anything feels wrong.'],
+  ['How communities are using SkillBridge','2026-08-25','From NGOs finding web designers to families finding tutors, SkillBridge helps communities connect with local talent. Post an opportunity with a clear deadline and budget, and matching providers will respond.']
+];
+
+const LEGAL = {
+  privacy: ['Privacy Policy', [['What we collect','We collect the details you give us when you register and build a profile: name, email, phone number, location, skills, and the messages and requests you send on the platform.'], ['How we use it','We use your information to show your profile to people searching for your skills, to match you with opportunities, to process connection payments and to keep the platform safe.'], ['What we share','Your phone number is shown only to your connections unless you change this in Settings. We never sell your personal information.'], ['Your choices','You can edit your profile, hide it from search, change notification settings or delete your account at any time from Settings.']]],
+  terms: ['Terms of Service', [['Using SkillBridge','SkillBridge is a platform that connects people who have skills with people and organizations that need them. You must provide accurate information and be at least 18 years old.'], ['Connection fees','Connections are paid per request: Standard and Premium connection credits. Fees are shown before you pay and are used when you send a request.'], ['Your responsibilities','Agree scope and payment directly with the other person. Do not post misleading listings, spam, or content that is illegal or abusive.'], ['Enforcement','Administrators may suspend accounts or remove listings that break these terms.']]],
+  cookies: ['Cookie Policy', [['What are cookies','Cookies are small files stored in your browser to remember your settings and keep you signed in.'], ['How we use them','We use essential cookies for sign-in and security, and optional cookies to understand which pages are most useful.'], ['Managing cookies','You can block or delete cookies in your browser settings. Some features may not work without essential cookies.']]]
+};
+
+/* ============ 3. UTILITY FUNCTIONS ============ */
+const toast = (m, e) => {
+  const t = document.createElement('div');
+  t.className = 'toast' + (e ? ' e' : '');
+  t.textContent = m;
+  $('#toasts').appendChild(t);
+  setTimeout(() => t.remove(), 3200);
+};
+
+const prov = id => S.P.find(p => p.id == id);
+const unread = () => S.notes.filter(n => n.n).length;
+const msgN = () => Object.values(S.unread).reduce((a, b) => a + b, 0);
+const go = h => location.hash = h;
+
+const opts = (l, v) => l.map(o => `<option ${o == v ? 'selected' : ''}>${esc(o)}</option>`).join('');
+
+const head = (t, s, x = '') => `<div class="row sp wrap" style="margin-bottom:22px"><div><h1>${t}</h1><div class="mu">${s}</div></div>${x}</div>`;
+
+const empty = (a, b) => `<div class="card empty"><h3>${a}</h3><p>${b}</p></div>`;
+
+const tog = (k, l, d, pre = 'pref') => `<label class="tgl"><span><b>${l}</b><div class="mu">${d}</div></span><span class="tog"><input type="checkbox" data-${pre}="${k}" ${(pre == 'pref' ? S.prefs : S.aprefs)[k] ? 'checked' : ''}><i></i></span></label>`;
+
+const allSkills = () => [...S.skills.map(k => ({id: k.id, t: k.t, o: S.user.name, c: k.c, st: k.st, own: 1})), ...S.adminSkills];
+
+const mailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const strong = p => p.length >= 8 && /\d/.test(p) && /[A-Za-z]/.test(p);
+
+/* ============ 4. PUBLIC PAGES ============ */
+function nav() {
+  return `<div class="nav"><a class="logo" href="#/">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><div class="links"><a data-a="sc" data-v="how">How It Works</a><a data-a="sc" data-v="explore">Explore Skills</a><a data-a="sc" data-v="why">Why SkillBridge</a><a data-a="sc" data-v="opps">Opportunities</a><a href="#/about">About</a></div><div class="row"><div class="row cta">${S.logged ? '<a class="btn s" href="#/app/dashboard">Dashboard</a>' : '<a class="btn o s" href="#/login">Login</a><a class="btn s" href="#/signup">Sign Up</a>'}</div><button class="burger" data-a="burger" aria-label="Menu">☰</button></div><div class="mmenu" id="mm"><a data-a="sc" data-v="how">How It Works</a><a data-a="sc" data-v="explore">Explore Skills</a><a data-a="sc" data-v="why">Why SkillBridge</a><a data-a="sc" data-v="opps">Opportunities</a><a href="#/about">About</a>${S.logged ? '<a href="#/app/dashboard" class="bl">Dashboard</a>' : '<a href="#/login">Login</a><a href="#/signup" class="bl">Sign Up</a>'}</div></div>`;
+}
+
+function foot() {
+  return `<footer><div class="fcols"><div><div class="logo">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></div><p class="mu" style="margin:12px 0;max-width:320px">Connecting skills with opportunities across Africa and beyond.</p><div class="mu" style="color:var(--gr)">✓ HEXCORE TEAM Project</div></div>
+<div><h4>Platform</h4><a class="fl" href="#/app/find">Find a Skill</a><a class="fl" href="#/app/offer">Offer a Skill</a><a class="fl" href="#/app/opportunities">Opportunities</a><a class="fl" data-a="sc" data-v="how">How It Works</a></div>
+<div><h4>Company</h4><a class="fl" href="#/about">About Us</a><a class="fl" href="#/contact">Contact</a><a class="fl" href="#/help">Help Center</a><a class="fl" href="#/blog">Blog</a></div>
+<div><h4>Legal</h4><a class="fl" href="#/privacy">Privacy Policy</a><a class="fl" href="#/terms">Terms of Service</a><a class="fl" href="#/cookies">Cookie Policy</a><a class="fl" href="#/admin-login">Admin Login</a></div></div>
+<div class="fbot"><span>© 2026 HEXCORE SKILLBRIDGE. All rights reserved.</span><span>Built by the <a class="bl" href="#/about">HEXCORE Team</a></span></div></footer>`;
+}
+
+const pub = (body) => nav() + `<div class="pubp">${body}</div>` + foot() + modalHTML();
+
+function landing() {
+  const cta = S.logged ? '#/app/find' : '#/signup';
+  const cta2 = S.logged ? '#/app/offer' : '#/signup';
+  const cnt = [412, 380, 295, 260, 230, 205, 140, 120, 310, 275, 180, 95];
+  
+  const net = `<svg viewBox="0 0 420 340" class="net" role="img" aria-label="People and organizations connecting through skills"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><path d="M30 260 Q210 90 390 260" stroke="url(#g)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M90 140L210 80L330 140L210 230ZM210 80V230" stroke="#3b82f6" stroke-opacity=".45" stroke-width="2" fill="none"/>${[[90,140,'🧑🏾‍💻'],[210,80,'🏢'],[330,140,'🛠'],[210,230,'🤝']].map(([x,y,e]) => `<circle cx="${x}" cy="${y}" r="32" fill="#0a1226" stroke="url(#g)" stroke-width="3"/><text x="${x}" y="${y+10}" text-anchor="middle" font-size="28">${e}</text>`).join('')}</svg>`;
+  
+  return nav() + `<div class="hero" id="top"><div class="orb o1"></div><div class="orb o2"></div><div><span class="badge-hero"><i></i>The Skill Economy Platform</span><h1>Where Skills <b>Meet Needs.</b></h1><p>Discover skills. Showcase what you can do. Connect with people, businesses and organizations that need your expertise.</p><div class="row wrap"><a class="btn lg" href="${cta}">🔍 Find a Skill →</a><a class="btn o lg" href="${cta2}">＋ Offer a Skill</a></div><div class="hstats">${[[2800,'Registered Users'],[4100,'Skill Listings'],[3200,'Connections Made']].map(s => `<div><b data-count="${s[0]}" data-suf="+">${s[0].toLocaleString('en-US')}+</b><span class="mu">${s[1]}</span></div>`).join('')}</div></div>
+<div class="hvis">${net}<div class="fcard fc1">${av('John Mwangi',40,1)}<div><b>John Mwangi <span class="bl">✓</span></b><div class="mu" style="font-size:12px">Graphic Designer · ★ 4.8</div></div><span class="btn s" style="pointer-events:none">Connect</span></div><div class="fcard fc2">💻 Technology</div><div class="fcard fc3"><span class="stack">${av('Grace Wanjiku',30)}${av('Daniel Ochieng',30)}${av('Sarah Njeri',30)}</span><b>+2.8k</b><span class="mu" style="font-size:12px">providers ready to connect</span></div><div class="fcard fc4"><span style="color:var(--gr)">✓</span> Request accepted</div></div></div>
+<div class="sec" id="how"><h2>How <span class="gt">SkillBridge</span> Works</h2><p>A simple four-step process that connects skill providers with skill seekers.</p><div class="grid g4">${[['👤','Create Your Profile','Sign up and build your professional profile. Add your skills, experience, location and what you offer or need.'],['🔍','Showcase or Search','List your skills for others to find, or search for skill providers matching exactly what you need.'],['🤝','Connect','Send connection requests, message directly and establish real professional connections.'],['🚀','Collaborate','Work together, complete projects and leave reviews to build trust.']].map((x,i) => `<div class="card hv rv"><div class="snum">${i+1}</div><div class="ico c${i}">${x[0]}</div><h3>Step ${i+1}: ${x[1]}</h3><p class="mu" style="margin-top:6px">${x[2]}</p></div>`).join('')}</div></div>
+<div class="sec" id="explore"><h2>Explore <span class="gt">Skills</span></h2><p>Browse skill categories and find what you are looking for.</p><div class="grid g4 keep">${CATS.map((c,i) => `<a class="card cat hv rv" href="${cta}"><div class="ico c${i%4}">${c[1]}</div><b>${c[0]}</b><div class="mu" style="font-size:12px">${cnt[i]} providers</div></a>`).join('')}</div></div>
+<div class="sec light" id="why"><h2>Why SkillBridge?</h2><p>Built for everyone who has a skill, or needs one.</p><div class="grid g5">${[['🔎','Discover Talent','Search by skill, location and availability to find the right person fast.'],['🌟','Showcase Your Skills','Build a professional profile with your services, experience and portfolio.'],['🛎','Find Services','From plumbers to programmers, find trusted services near you or online.'],['🔗','Build Connections','Send requests, chat and build lasting working relationships.'],['🚀','Create Opportunities','Post projects and tasks and let skilled people respond.']].map((c,i) => `<div class="card hv rv"><div class="ico c${i%4}">${c[0]}</div><h3>${c[1]}</h3><p style="margin-top:6px;font-size:14px">${c[2]}</p></div>`).join('')}</div></div>
+<div class="sec" id="opps"><h2>Open <span class="gt">Opportunities</span></h2><p>People, businesses and communities posting work that needs your skills.</p><div class="grid g3">${S.opps.slice(0,3).map(o => `<a class="card cat hv rv" href="#/app/opportunities" style="text-align:left;border-left:3px solid hsl(${hue(o.o)} 70% 55%)"><b>${esc(o.t)}</b><div class="bl" style="font-size:14px">${esc(o.o)}</div><div style="margin:6px 0"><span class="tag">${esc(o.s)}</span><span class="tag v">${esc(o.k)}</span></div><div class="mu" style="font-size:13px">📍 ${esc(o.l)} · 🕑 ${o.dl}</div><div style="color:var(--gr);font-size:14px">${esc(o.pay)}</div></a>`).join('')}</div></div>
+<div class="sec"><div class="banner rv"><h2>Ready to bridge the gap?</h2><div style="color:#c7d2fe;margin:8px 0 22px">Join thousands of people and organizations connecting through skills.</div><div class="row wrap" style="justify-content:center"><a class="btn lg" href="${cta}">Get started free →</a><a class="btn o lg" href="#/contact">Talk to us</a></div></div></div>` + foot();
+}
+
+function about() {
+  return pub(`<h1>About SkillBridge</h1><p>SkillBridge is a skill-connection platform. It connects people who have skills, knowledge, talents and professional services with people, businesses, organizations and communities that need them.</p><div class="row wrap" style="margin:18px 0"><span class="tag v">Skill Provider → SkillBridge → Skill Seeker</span></div><h2>Our mission</h2><p>To make it simple for anyone, from a plumber in Nakuru to a designer in Embu, to be discovered, to connect and to work together.</p><h2>What makes us different</h2><div class="grid g3" style="margin-top:12px">${[['🌍','For everyone','Not only students: any person, business or community can offer or need skills.'],['🤝','Real connections','Pay-per-connection keeps requests serious and responses fast.'],['🛡','Safe by design','Reporting, admin review and privacy controls protect every user.']].map(c => `<div class="card"><div class="ico">${c[0]}</div><b>${c[1]}</b><p class="mu" style="margin-top:6px">${c[2]}</p></div>`).join('')}</div><h2>The team</h2><p>SkillBridge is a System Analysis and Design project built by the HEXCORE Team, following the full Software Development Life Cycle from problem identification to maintenance.</p><div class="row wrap" style="margin-top:16px"><a class="btn" href="#/signup">Join SkillBridge</a><a class="btn o" href="#/contact">Contact us</a></div>`);
+}
+
+function contact() {
+  return pub(`<h1>Contact us</h1><p>Questions, feedback or partnership ideas? We would love to hear from you.</p><div class="grid g3" style="margin:18px 0">${[['✉','Email','hello@skillbridge.example'],['☎','Phone','+254 700 000 000'],['📍','Location','Nairobi, Kenya']].map(c => `<div class="card"><div class="ico">${c[0]}</div><b>${c[1]}</b><div class="mu">${c[2]}</div></div>`).join('')}</div><form class="card" data-f="contact" novalidate><div class="grid g2"><div><label>Your name</label><input name="name"><div class="err" id="e-name"></div></div><div><label>Email</label><input name="email"><div class="err" id="e-email"></div></div></div><label>Subject</label><input name="sub"><label>Message</label><textarea name="msg" rows="5"></textarea><div class="err" id="e-msg"></div><button class="btn" style="margin-top:16px">Send message</button></form>`);
+}
+
+function help() {
+  const F = [
+    ['How do I create an account?','Click Sign Up, fill in your details, choose whether you provide skills, need skills, or both, then complete your profile.'],
+    ['How much does a connection cost?','A connection fee ' + money(PLANS.conn.a) + ' and a Premium connection costs ' + money(PLANS.prem.a) + '. Premium requests are highlighted and prioritised.'],
+    ['How do I pay?','Open Connection Fees, choose a plan and pay with M-Pesa. Your credit is added immediately after payment.'],
+    ['Can I change my role later?','Yes. Go to Settings → Profile and choose "I provide skills", "I need skills" or "Both".'],
+    ['How do I offer a skill?','Open Offer a Skill, fill in the details and press Publish Skill. You can edit, pause or delete it any time in My Skills.'],
+    ['How do I report a user or listing?','Open their profile and press Report, choose a reason, and our admins will investigate.'],
+    ['I forgot my password','Use Forgot Password on the login page and we will send you a reset link.']
+  ];
+  return pub(`<h1>Help Center</h1><p>Answers to the most common questions.</p><div style="margin-top:18px">${F.map(f => `<details class="faq"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div><p>Still stuck? <a class="bl" href="#/contact">Contact support</a>.</p>`);
+}
+
+function blog() {
+  return pub(`<h1>Blog</h1><p>Tips, stories and news from the SkillBridge team.</p><div class="grid g2" style="margin-top:18px">${BLOG.map((b,i) => `<div class="card cat" style="text-align:left" data-a="blog" data-v="${i}"><span class="tag v">${b[1]}</span><h3 style="margin:8px 0">${b[0]}</h3><p class="mu">${b[2].slice(0,110)}…</p><span class="bl">Read more →</span></div>`).join('')}</div>`);
+}
+
+function legal(k) {
+  const L = LEGAL[k];
+  return pub(`<h1>${L[0]}</h1><p>Last updated: 2026-10-01</p>${L[1].map(s => `<h2>${s[0]}</h2><p>${s[1]}</p>`).join('')}`);
+}
+
+/* ---- AUTH PAGES ---- */
+function login() {
+  return `<div class="auth"><form class="card" data-f="login" novalidate><a class="logo" href="#/" style="margin-bottom:20px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><h2>Welcome back</h2><p class="mu">Login to continue. Demo: any valid email and any password.</p><label>Email</label><input name="email" type="text" placeholder="you@example.com" autocomplete="email"><div class="err" id="e-email"></div><label>Password</label><input name="pw" type="password" autocomplete="current-password"><div class="err" id="e-pw"></div><div class="row" style="margin:16px 0;gap:10px"><button class="btn" style="flex:1">Login</button><a class="btn o" href="#/forgot">Forgot Password</a></div><a class="btn o" style="width:100%" href="#/signup">Create Account</a></form></div>`;
+}
+
+function forgot() {
+  return `<div class="auth"><form class="card" data-f="forgot" novalidate><a class="logo" href="#/" style="margin-bottom:20px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><div id="fg"><h2>Reset your password</h2><p class="mu">Enter your email and we will send you a reset link.</p><label>Email</label><input name="email" placeholder="you@example.com"><div class="err" id="e-email"></div><button class="btn" style="width:100%;margin-top:16px">Send reset link</button></div><p style="text-align:center;margin-top:16px"><a class="bl" href="#/login">← Back to login</a></p></form></div>`;
+}
+
+function signup() {
+  const f = (n, l, t, ph, ex = '') => `<div><label>${l}</label><div class="pwwrap"><input name="${n}" type="${t}" placeholder="${ph}" ${ex}>${t == 'password' ? '<span class="eye" data-a="eye" title="Show / hide">👁</span>' : ''}</div><div class="err" id="e-${n}"></div></div>`;
+  
+  return `<div class="auth"><form class="card wide" data-f="signup" novalidate><a class="logo" href="#/" style="justify-content:center;margin-bottom:10px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><h2 style="text-align:center">Create Your Account</h2><p class="mu" style="text-align:center;margin-bottom:6px">Join SkillBridge and start connecting today</p>
+<div class="grid g2" style="gap:0 16px">${f('name','Full Name','text','Enter your name')}${f('email','Email Address','text','you@email.com')}${f('phone','Phone Number','tel','+254 7XX XXX XXX')}${f('loc','Location','text','Nairobi, Kenya')}${f('pw','Password','password','Min. 8 characters','data-pw')}${f('pw2','Confirm Password','password','Repeat password')}</div>
+<div class="meter"><i id="pwm"></i></div><div class="mu" id="pwl" style="font-size:12px;min-height:18px;margin-top:4px"></div>
+<label>Account Type</label><div class="seg" id="seg">${[['💼','I Provide Skills','Showcase your skills and get hired','I provide skills'],['🔍','I Need Skills','Find skilled professionals for your needs','I need skills'],['🤝','Both','Provide and seek skills','Both']].map(r => `<button type="button" class="acct ${r[3] == S.signRole ? 'on' : ''}" data-a="role" data-v="${r[3]}"><span>${r[0]}</span><b>${r[1]}</b><small>${r[2]}</small></button>`).join('')}</div>
+<p class="mu" style="margin:8px 0 16px">You can change your role later in Settings.</p><button class="btn" style="width:100%">Create Account →</button><p class="mu" style="margin-top:16px;text-align:center">Already have an account? <a class="bl" href="#/login">Login</a></p><p class="mu" style="margin-top:10px;text-align:center;font-size:12px">By creating an account, you agree to our <a class="bl" href="#/terms">Terms of Service</a> and <a class="bl" href="#/privacy">Privacy Policy</a>.</p></form></div>`;
+}
+
+function setup() {
+  const u = S.user, w = S.wiz, st = S.step, isP = S.signRole != 'I need skills';
+  const steps = ['Basic Info', 'Skills & Experience', 'Availability'];
+  let b = '';
+  
+  if (st == 1) {
+    b = `<h2>Set Up Your Profile</h2><p class="mu">Help others know who you are and what you do.</p><div class="avwrap">${uav(96)}<span class="camb" data-a="ph" title="Upload photo">📷</span><input type="file" id="ph" accept="image/*" data-photo hidden></div><div class="mu" style="text-align:center;font-size:12px;margin-top:-6px">JPG or PNG, up to 5MB</div>
+<label>Short Bio</label><textarea data-w="bio" rows="4" maxlength="300" placeholder="Tell people about yourself and what you do...">${esc(w.bio)}</textarea><div class="err" id="e-bio"></div>
+<label>I am a</label><div class="seg" id="pseg">${['I provide skills','I need skills','Both'].map(r => `<button type="button" data-a="prole" data-v="${r}" class="${r == S.signRole ? 'on' : ''}">${r}</button>`).join('')}</div>
+<label>Preferred Contact Method</label><select data-w="comm">${opts(['Email','Phone / WhatsApp','SkillBridge Messages'], w.comm)}</select>
+<button class="btn" style="width:100%;margin-top:20px" data-a="wnext">Continue →</button>`;
+  } else if (st == 2) {
+    b = `<h2>Skills &amp; Experience</h2><p class="mu">${isP ? 'Tell seekers what you can do.' : 'Tell providers what you are looking for.'}</p>
+<label>${isP ? 'Your skills' : 'Skills you need'} (comma separated)</label><input data-w="skills" value="${esc(w.skills)}" placeholder="Graphic design, SEO, Plumbing"><div class="err" id="e-skills"></div>
+<div class="grid g2" style="gap:0 16px"><div><label>Experience</label><select data-w="exp">${opts(['Less than 1 year','1-3 years','3-5 years','5+ years'], w.exp)}</select></div><div><label>Education / Training</label><input data-w="edu" value="${esc(w.edu)}" placeholder="e.g. Diploma in ICT"></div></div>
+<label>Portfolio / Work Samples (link)</label><input data-w="pf" value="${esc(w.pf)}" placeholder="https://">
+<div class="row" style="margin-top:20px"><button class="btn o" data-a="wprev">← Back</button><button class="btn" style="flex:1" data-a="wnext">Continue →</button></div>`;
+  } else if (st == 3) {
+    b = `<h2>Availability</h2><p class="mu">Let skill seekers know when you are available.</p><div class="opts2">${[['Full Time','Available 40+ hrs/week'],['Part Time','Available 20 hrs/week'],['Weekends','Sat & Sun only'],['Flexible','Flexible hours'],['On Demand','As needed'],['Not Available','Busy currently']].map(o => `<button type="button" class="opt ${w.avail == o[0] ? 'on' : ''}" data-a="wav" data-v="${o[0]}"><b>${o[0]}</b><small>${o[1]}</small></button>`).join('')}</div>
+<div class="pv"><b>Profile preview</b><div class="row" style="margin-top:10px">${uav(52)}<div style="min-width:0"><b>${esc(u.name)}</b><div class="mu">${esc(u.loc)} · ${S.signRole == 'I provide skills' ? 'Skill Provider' : S.signRole == 'I need skills' ? 'Skill Seeker' : 'Provider &amp; Seeker'}</div><div>${w.skills.split(',').map(x => x.trim()).filter(Boolean).slice(0,4).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div></div></div><p class="mu" style="margin-top:8px">${esc(w.bio)}</p></div>
+<div class="almost">✓ <span><b>Almost there!</b><br><span class="mu">Click "Complete Setup" to create your profile and start connecting.</span></span></div>
+<div class="row" style="margin-top:16px"><button class="btn o" data-a="wprev">← Back</button><button class="btn" style="flex:1" data-a="wdone">Complete Setup →</button></div>`;
+  }
+  
+  return `<div class="auth"><div class="card wiz"><a class="logo" href="#/" style="justify-content:center;margin-bottom:14px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><div class="steps">${steps.map((x,i) => `<div class="stp ${i+1 == st ? 'on' : i+1 < st ? 'ok' : ''}"><span>${i+1 < st ? '✓' : i+1}</span>${x}</div>`).join('')}</div><div class="bar" style="margin-bottom:18px"><i style="width:${st/3*100}%"></i></div>${b}</div></div>`;
+}
+
+function adminLogin() {
+  return `<div class="auth"><form class="card" data-f="admin" novalidate><a class="logo" href="#/" style="margin-bottom:16px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><h2>Admin Login</h2><p class="mu">Demo: admin@skillbridge.com / Admin@123</p><label>Email</label><input name="email"><label>Password</label><input name="pw" type="password"><div class="err" id="e-pw"></div><button class="btn" style="width:100%;margin-top:16px">Login as Admin</button><p style="text-align:center;margin-top:14px"><a class="bl" href="#/">← Back to site</a></p></form></div>`;
+}
+
+/* ============ 5. APP SHELL ============ */
+const NAV = [
+  ['dashboard','▦','Dashboard'],
+  ['find','⌕','Find a Skill'],
+  ['offer','＋','Offer a Skill'],
+  ['connections','⇄','Connections'],
+  ['fees','💳','Connection Fees'],
+  ['requests','➤','Requests'],
+  ['messages','✉','Messages'],
+  ['opportunities','◎','Opportunities'],
+  ['reviews','☆','Reviews'],
+  ['notifications','🔔','Notifications'],
+  ['settings','⚙','Settings']
+];
+
+const bdg = k => {
+  if (k == 'messages' && msgN()) return `<span class="badge">${msgN()}</span>`;
+  if (k == 'notifications' && unread()) return `<span class="badge b">${unread()}</span>`;
+  return '';
+};
+
+function shell(page, body) {
+  const u = S.user;
+  return `<div class="app ${S.collapsed ? 'col' : ''}"><aside class="side"><div class="row sp"><a class="logo" href="#/app/dashboard" style="padding:6px 4px">${HEX}<span class="lt">HEXCORE<b>SKILLBRIDGE</b></span></a><a class="nl" data-a="collapse" title="Collapse menu" style="padding:6px 8px">${S.collapsed ? '›' : '‹'}</a></div><div class="row" style="padding:8px">${uav(40)}<div class="uinfo"><b style="font-size:14px">${esc(u.name)}</b><div class="mu" style="font-size:12px">${esc(u.loc)}</div></div></div>${NAV.map(n => `<a href="#/app/${n[0]}" title="${n[2]}" class="${page == n[0] ? 'on' : ''}"><span>${n[1]}</span><span class="lbl">${n[2]}</span>${bdg(n[0])}</a>`).join('')}<a data-a="logout" title="Logout" style="margin-top:auto"><span>⏻</span><span class="lbl">Logout</span></a></aside><main class="main" id="main">${body}</main></div>
+<nav class="bnav">${[['dashboard','▦','Home'],['find','⌕','Find'],['messages','✉','Chat'],['fees','💳','Fees']].map(n => `<a href="#/app/${n[0]}" class="${page == n[0] ? 'on' : ''}"><span>${n[1]}</span>${n[2]}</a>`).join('')}<a data-a="more"><span>☰</span>More</a></nav>${modalHTML()}`;
+}
+
+function pcard(p, rec) {
+  const st = S.conns.includes(p.id) ? 'Connected' : S.sent.some(s => s.id == p.id) ? 'Pending' : 'Connect';
+  return `<div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="row">${av(p.n, 52, p.o)}<div style="flex:1;min-width:0"><b>${p.n} <span class="bl">✓</span></b><div class="bl" style="font-size:14px">${p.s}</div><div class="mu" style="font-size:13px">📍 ${p.l} · ★ ${p.rt} (${p.rc})</div></div><span class="pill ${p.a ? 'ok' : 'bz'}">${p.a ? 'Available' : 'Busy'}</span></div>${rec ? '<span class="tag v" style="align-self:flex-start">Recommended for you</span>' : ''}<p class="mu">${p.d}</p><div>${p.t.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')}</div><div class="mu" style="font-size:13px">🕑 ${p.x} years · <span style="color:var(--gr)">${p.rate}</span></div><div class="row" style="margin-top:auto"><a class="btn o s" style="flex:1" href="#/app/profile/${p.id}">View Profile</a><button class="btn s" style="flex:1" data-a="connect" data-v="${p.id}">${st}</button></div></div>`;
+}
+
+/* ============ 6. USER PAGES ============ */
+const pages = {
+  dashboard() {
+    const u = S.user, f = S.fees;
+    const rec = S.P.filter(p => !S.conns.includes(p.id)).slice(0, 3);
+    const steps = [['Profile photo', !!u.photo], ['Bio added', !!u.bio], ['Skills listed', S.skills.length > 0], ['Portfolio added', S.portfolio], ['First connection', S.conns.length > 0]];
+    const pc = steps.filter(s => s[1]).length * 20;
+    
+    return `<div class="row sp wrap" style="margin-bottom:22px"><div class="row">${uav(60)}<div><div class="mu">Welcome back 👋</div><h1>Welcome to SkillBridge, ${esc(u.name.split(' ')[0])}</h1><div class="bl">${esc(u.loc)}</div></div></div><div class="row wrap"><a class="btn s" href="#/app/find">🔍 Find a Skill</a><a class="btn o s" href="#/app/offer">＋ Offer a Skill</a></div></div>
+<div class="grid g4 keep">${[['My Skills',S.skills.length,'Active listings'],['Active Requests',S.inc.length+S.sent.length,`${S.inc.length} incoming, ${S.sent.length} sent`],['Connections',S.conns.length,'Total'],['Messages',msgN(),'Unread conversations']].map((s,i) => `<div class="card stat hv"><div class="sico c${i}">${['💼','➤','👥','💬'][i]}</div><span class="mu">${s[0]}</span><h2 data-count="${s[1]}">${s[1]}</h2><span class="mu">${s[2]}</span></div>`).join('')}</div>
+<h3 style="margin:20px 0 10px">Quick Actions</h3><div class="grid g4 keep">${[['Find a Skill','find','🔍'],['Offer a Skill','offer','＋'],['View Requests','requests','➤'],['Connections','connections','⇄']].map((a,i) => `<a class="card cat hv" href="#/app/${a[1]}"><div class="ico c${i}">${a[2]}</div><b>${a[0]}</b></a>`).join('')}</div>
+<div class="grid split" style="margin-top:16px"><div class="grid" style="align-content:start"><div class="card"><div class="row sp"><h3>Recommended Skills &amp; Providers</h3><a class="bl" href="#/app/find">See all →</a></div>${rec.length ? rec.map(p => `<div class="item">${av(p.n,44,p.o)}<div style="flex:1;min-width:0"><b>${p.n} <span class="bl">✓</span></b><div class="bl" style="font-size:13px">${p.s}</div><div class="mu" style="font-size:12px">📍${p.l} ★${p.rt}</div></div><span class="pill ${p.a ? 'ok' : 'bz'}">${p.a ? 'Available' : 'Busy'}</span><a class="bl" href="#/app/profile/${p.id}">View</a></div>`).join('') : '<div class="empty">No recommendations yet.</div>'}</div>
+<div class="card"><div class="row sp"><h3>My Skills</h3><a class="bl" href="#/app/myskills">Manage →</a></div>${S.skills.map(k => `<div class="item"><div style="flex:1"><b>${esc(k.t)}</b><div class="mu" style="font-size:13px">${k.v} views · ${k.r} requests</div></div><span class="pill ${k.st == 'Active' ? 'ok' : k.st == 'Draft' ? 'dr' : 'bz'}">${k.st}</span></div>`).join('') || '<div class="empty">No skills yet.</div>'}<a class="btn o s" style="width:100%;margin-top:10px;border-style:dashed" href="#/app/offer">＋ Add a new skill</a></div></div>
+<div class="grid" style="align-content:start"><div class="card"><div class="row sp"><h3>Recent Activity</h3><a class="bl" href="#/app/notifications">All →</a></div>${S.notes.slice(0,3).map(n => `<a class="item" href="${n.l || '#/app/notifications'}"><span>${n.i}</span><div><div style="font-size:14px">${esc(n.m)}</div><div class="mu" style="font-size:12px">${n.w}</div></div></a>`).join('') || '<div class="empty">No notifications.</div>'}</div>
+<div class="card"><div class="row sp"><h3>Available Opportunities</h3><a class="bl" href="#/app/opportunities">All →</a></div>${S.opps.slice(0,2).map(o => `<a class="item" href="#/app/opportunities"><div><b style="font-size:14px">${esc(o.t)}</b><div class="bl" style="font-size:13px">${esc(o.s)}</div><div class="mu" style="font-size:12px">📍${esc(o.l)} · ${o.dl}</div></div></a>`).join('')}</div>
+<div class="card"><div class="row sp"><h3>Connection Credits</h3><a class="bl" href="#/app/fees">
+ →</a></div><div class="row" style="margin-top:10px"><div><h2 class="bl">${f.std}</h2><span class="mu">Standard</span></div><div style="margin-left:24px"><h2 style="color:var(--vi)">${f}</h2><span class="mu">Premium</span></div></div></div>
+<div class="card"><h3>Profile Completion</h3><div class="row sp mu" style="margin:8px 0"><span>${pc}% Complete</span><span>${pc}%</span></div><div class="bar"><i style="width:${pc}%"></i></div><div class="mu" style="margin-top:10px;font-size:14px">${steps.map(s => (s[1] ? '✓ ' : '○ ') + s[0]).join('<br>')}</div></div></div></div>`;
+  },
+  
+  find() {
+    const q = S.q.toLowerCase().trim();
+    const syn = {web: ['web','website','developer','react','interface'], design: ['design','graphic','brand'], plumb: ['plumb','pipe'], tutor: ['tutor','math','teach']};
+    let toks = q.split(/\s+/).filter(Boolean), ex = [];
+    toks.forEach(t => Object.keys(syn).forEach(k => { if (t.startsWith(k)) ex.push(...syn[k]); }));
+    
+    let list = S.P.map(p => {
+      const h = (p.s + ' ' + p.t.join(' ') + ' ' + p.d + ' ' + p.c).toLowerCase();
+      let sc = 0;
+      toks.forEach(t => { if (h.includes(t)) sc += 5; });
+      ex.forEach(t => { if (h.includes(t)) sc += 2; });
+      if (p.l.split(',')[0] == S.user.loc.split(',')[0]) sc += 2;
+      if (p.a) sc += 2;
+      sc += p.x / 4 + p.rt;
+      return {p, sc, m: !toks.length || toks.some(t => h.includes(t)) || ex.some(t => h.includes(t))};
+    }).filter(r => r.m && (S.cat == 'All' || r.p.c == S.cat) && (!S.avail || (S.avail == 'a' ? r.p.a : !r.p.a)) && (!S.loc || r.p.l.startsWith(S.loc)) && (!S.exp || (S.exp == 'lt' ? r.p.x < 3 : S.exp == 'mid' ? r.p.x >= 3 && r.p.x <= 5 : r.p.x > 5)) && (!S.sty || r.p.ty == S.sty || r.p.ty == 'Both'));
+    
+    if (S.sort == 'rt') list.sort((a,b) => b.p.rt - a.p.rt);
+    else if (S.sort == 'x') list.sort((a,b) => b.p.x - a.p.x);
+    else list.sort((a,b) => b.sc - a.sc);
+    
+    const nf = [S.cat != 'All', S.avail, S.loc, S.exp, S.sty].filter(Boolean).length;
+    
+    return head('Find a Skill', 'Discover skilled professionals ready to help you.') + `<form data-f="search" class="row"><input id="q" value="${esc(S.q)}" placeholder="What skill or service are you looking for?"><button class="btn">Search</button><button type="button" class="btn o" data-a="fopen">⚙ Filters${nf ? ' (' + nf + ')' : ''}</button></form>
+<div class="chips">${['All',...CATS.slice(0,8).map(c => c[0])].map(c => `<span class="chip ${S.cat == c ? 'on' : ''}" data-a="cat" data-v="${c}">${c}</span>`).join('')}</div>
+${S.fo ? `<div class="card" style="margin-bottom:16px"><div class="grid g4 keep"><div><label style="margin-top:0">Category</label><select data-a="fl" data-v="cat"><option value="All">All categories</option>${S.cats.map(c => `<option ${S.cat == c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></div><div><label style="margin-top:0">Location</label><select data-a="fl" data-v="loc"><option value="">Any location</option>${['Embu','Nairobi','Meru','Mombasa','Kisumu','Kakamega','Nakuru','Eldoret','Machakos'].map(l => `<option ${S.loc == l ? 'selected' : ''}>${l}</option>`).join('')}</select></div><div><label style="margin-top:0">Availability</label><select data-a="fl" data-v="avail"><option value="">Any</option><option value="a" ${S.avail == 'a' ? 'selected' : ''}>Available</option><option value="b" ${S.avail == 'b' ? 'selected' : ''}>Busy</option></select></div><div><label style="margin-top:0">Experience</label><select data-a="fl" data-v="exp"><option value="">Any</option><option value="lt" ${S.exp == 'lt' ? 'selected' : ''}>Less than 3 years</option><option value="mid" ${S.exp == 'mid' ? 'selected' : ''}>3-5 years</option><option value="gt" ${S.exp == 'gt' ? 'selected' : ''}>5+ years</option></select></div><div><label style="margin-top:0">Service Type</label><select data-a="fl" data-v="sty"><option value="">Any</option><option value="Remote" ${S.sty == 'Remote' ? 'selected' : ''}>Remote only</option><option value="On-site" ${S.sty == 'On-site' ? 'selected' : ''}>On-site only</option></select></div></div><div class="row" style="margin-top:16px"><button class="btn" style="flex:1" data-a="fclear">Reset Filters</button></div></div>` : ''}
+<div class="grid g3" style="margin-top:16px">${list.length ? list.map(r => pcard(r.p)).join('') : '<div class="empty"><h3>No providers found</h3><p>Try adjusting your search or filters.</p></div>'}</div>`;
+  },
+  
+  profile(id) {
+    const p = prov(id);
+    if (!p) return empty('Provider not found', '<a class="bl" href="#/app/find">Back to search</a>');
+    
+    const ic = (CATS.find(c => c[0] == p.c) || [0, '◎'])[1];
+    const st = S.conns.includes(p.id) ? '✓ Connected' : S.sent.some(s => s.id == p.id) ? 'Request Pending' : 'Request Connection';
+    const rel = S.P.filter(x => x.c == p.c && x.id != p.id).concat(S.P.filter(x => x.c != p.c && x.id != p.id)).slice(0, 3);
+    const rv = [0, 1, 2].map(i => RV[(p.id + i) % 4]);
+    
+    return `<a class="bl" href="#/app/find">← Back to search</a><div class="card" style="margin:14px 0"><div class="row wrap">${av(p.n, 90, p.o)}<div style="flex:1;min-width:200px"><h1>${p.n} <span class="bl">✓</span></h1><div class="bl">${p.s}</div><div class="mu">📍 ${p.l} · <span class="pill ok">✓ Verified</span> <span class="pill ${p.a ? 'ok' : 'bz'}">${p.a ? 'Available' : 'Busy'}</span></div></div></div>
+<div class="row wrap" style="margin-top:16px"><button class="btn" data-a="connect" data-v="${p.id}">${st}</button><button class="btn o" data-a="msg" data-v="${p.id}">Message</button><button class="btn o" data-a="svcm" data-v="${p.id}">Request Service</button><button class="btn r s" data-a="reportm" data-v="${p.id}">Report</button></div></div>
+<div class="grid g4 keep" style="margin-bottom:16px">${[['Rating','★ '+p.rt],['Reviews',p.rc],['Connections',p.cn],['Jobs done',p.jb]].map(s => `<div class="card stat"><span class="mu">${s[0]}</span><h2>${s[1]}</h2></div>`).join('')}</div>
+<div class="grid g2"><div class="card"><h3>About</h3><p class="mu" style="margin-top:8px">${p.d}</p><h3 style="margin-top:16px">Skills &amp; Services</h3><div style="margin-top:8px">${p.t.map(t => `<span class="tag">${t}</span>`).join('')}</div><h3 style="margin-top:16px">Experience</h3><div class="item"><span>🏅</span><div><b>Professional ${p.s}</b><div class="mu">${p.x} years of experience</div></div></div><div class="item"><span>🎓</span><div><b>Training &amp; certification</b><div class="mu">Verified by SkillBridge</div></div></div></div>
+<div class="card"><h3>Details</h3><div class="item"><span class="mu">Rate</span><b style="margin-left:auto;color:var(--gr)">${p.rate}</b></div><div class="item"><span class="mu">Category</span><b style="margin-left:auto">${p.c}</b></div><div class="item"><span class="mu">Service type</span><b style="margin-left:auto">${p.ty}</b></div><div class="item"><span class="mu">Availability</span><b style="margin-left:auto">${p.a ? 'Available now' : 'Busy this week'}</b></div><div class="item"><span class="mu">Response time</span><b style="margin-left:auto">~1 hour</b></div></div></div>
+<h3 style="margin:24px 0 12px">Portfolio</h3><div class="grid g3">${[0,1,2].map(i => `<div class="tile" style="background:linear-gradient(135deg,hsl(${hue(p.n)+i*40} 60% 35%),hsl(${hue(p.n)+i*40+50} 60% 25%))">${ic}</div>`).join('')}</div>
+<h3 style="margin:24px 0 12px">Reviews</h3><div class="grid g3">${rv.map((r,i) => `<div class="card"><div class="row sp"><b>${r[0]}</b><span style="color:var(--am)">${stars(r[1])}</span></div><p class="mu" style="margin-top:8px">"${r[2]}"</p><div class="mu" style="font-size:12px;margin-top:6px">2026-0${9-i}-1${i+2}</div></div>`).join('')}</div>
+<h3 style="margin:24px 0 12px">Related skills &amp; providers</h3><div class="grid g3">${rel.map(r => pcard(r)).join('')}</div>`;
+  },
+  
+  offer(id) {
+    const k = id ? S.skills.find(s => s.id == id) : null;
+    const v = k || {};
+    return head(k ? 'Edit Skill' : 'Offer a Skill', k ? 'Update your skill listing.' : 'Create a skill listing to get discovered by people and organizations that need your expertise.') + `<form class="card" data-f="offer" novalidate><input type="hidden" name="id" value="${k ? k.id : ''}"><h3>Skill Details</h3><label>Skill Title *</label><input name="t" value="${esc(v.t || '')}" placeholder="e.g. Professional Graphic Design &amp; Branding"><div class="err" id="e-t"></div><div class="grid g2"><div><label>Category *</label><select name="c"><option value="">Select a category</option>${opts(S.cats, v.c)}</select><div class="err" id="e-c"></div></div><div><label>Service Type</label><select name="ty">${opts(['Remote','On-site','Both'], v.ty)}</select></div></div><label>Description *</label><textarea name="d" rows="5" maxlength="500" placeholder="Describe your skill in detail. What services do you offer? What results can clients expect?">${esc(v.d || '')}</textarea><div class="err" id="e-d"></div>
+<h3 style="margin-top:20px">Experience &amp; Location</h3><div class="grid g2"><div><label>Experience Level *</label><select name="exp">${opts(['Beginner','1-3 years','3-5 years','5+ years'], v.exp)}</select></div><div><label>Location *</label><input name="loc" value="${esc(v.loc || S.user.loc)}" placeholder="e.g. Nairobi, Kenya / Remote"></div><div><label>Availability</label><select name="av">${opts(['Available','Part-time','Weekends','Busy'], v.av)}</select></div><div><label>Expected Rate / Price (optional)</label><input name="rate" value="${esc(v.rate || '')}" placeholder="e.g. KES 2,500/hr or Negotiable"></div></div>
+<h3 style="margin-top:20px">Portfolio / Work Samples</h3><label>Add images, links or documents (JPG, PNG, PDF up to 10MB)</label><input type="file" name="files" multiple>
+<h3 style="margin-top:20px">Contact Preference</h3><select name="ct">${opts(['SkillBridge Messages','Email','Phone / WhatsApp','Any'], v.ct)}</select>
+<div class="row" style="margin-top:20px"><button type="button" class="btn o" data-a="draft">Save as Draft</button><button class="btn" style="flex:1">${k ? 'Save Changes' : 'Publish Skill'} →</button></div></form>`;
+  },
+  
+  myskills() {
+    const c = s => S.skills.filter(k => k.st == s).length;
+    return head('My Skills', 'Manage your published and draft skills.', '<a class="btn" href="#/app/offer">＋ Add Skill</a>') + `<div class="grid g4 keep" style="margin-bottom:16px">${[['Published',c('Active')],['Drafts',c('Draft')],['Paused',c('Paused')],['Requests received',S.skills.reduce((a,k) => a + k.r, 0)]].map(s => `<div class="card stat"><span class="mu">${s[0]}</span><h2>${s[1]}</h2></div>`).join('')}</div>` + (S.skills.length ? `<div class="grid g2">${S.skills.map(k => `<div class="card"><div class="row sp"><b>${esc(k.t)}</b><span class="pill ${k.st == 'Active' ? 'ok' : k.st == 'Draft' ? 'dr' : 'bz'}">${k.st == 'Active' ? 'Active' : k.st}</span></div><div class="bl" style="font-size:14px">${esc(k.c)}</div><p class="mu" style="margin-top:6px">${esc(k.d || '')}</p><div class="mu" style="margin:8px 0">👁 ${k.v} views · ➤ ${k.r} requests · ${esc(k.rate || '—')}</div><div class="row wrap"><a class="btn o s" href="#/app/offer/${k.id}">Edit</a><button class="btn o s" data-a="pause" data-v="${k.id}">${k.st == 'Paused' ? 'Resume' : k.st == 'Draft' ? 'Publish' : 'Pause'}</button><button class="btn r s" data-a="delsk" data-v="${k.id}">Delete</button></div></div>`).join('')}</div>` : empty('No skills yet.', 'Offer a skill to start getting requests.'));
+  },
+  
+  requests() {
+    const I = S.tab == 'in';
+    const L = I ? S.inc : S.sent;
+    return head('Connection Requests', 'Manage your incoming and sent connection requests.') + `<div class="chips"><span class="chip ${I ? 'on' : ''}" data-a="tab" data-v="in">Incoming (${S.inc.length})</span><span class="chip ${!I ? 'on' : ''}" data-a="tab" data-v="out">Sent (${S.sent.length})</span></div>` + (L.length ? `<div class="grid g2">${L.map(r => { const p = prov(r.id); return `<div class="card"><div class="row">${av(p.n, 52)}<div><b>${p.n}</b><div class="bl" style="font-size:14px">${p.s} · ${p.l.split(',')[0]}</div></div></div><p class="mu" style="margin:12px 0;padding:10px;background:var(--p2);border-radius:10px;font-style:italic">"${esc(r.m)}"</p><div class="mu" style="font-size:13px;margin-bottom:10px">🕑 ${r.d}${I ? '' : ' · Pending'}</div><div class="row wrap">${I ? `<button class="btn g s" data-a="accept" data-v="${p.id}">✓ Accept</button><button class="btn r s" data-a="reject" data-v="${p.id}">✕ Reject</button>` : `<button class="btn r s" data-a="cancel" data-v="${p.id}">Cancel request</button>`}<a class="btn o s" href="#/app/profile/${p.id}">View Profile</a></div></div>`; }).join('')}</div>` : empty(I ? 'No incoming requests.' : 'No sent requests.', 'Find a skill to start connecting.'));
+  },
+  
+  connections() {
+    const q = S.cq.toLowerCase();
+    const L = S.conns.filter(i => prov(i).n.toLowerCase().includes(q) || prov(i).s.toLowerCase().includes(q));
+    const nm = S.conns.filter(i => (S.cdate[i] || TODAY).startsWith('2026-10')).length;
+    
+    return head('My Connections', "People you've connected with on SkillBridge.") + (S.conns.length ? `<div class="grid g3 keep" style="margin-bottom:16px"><div class="card stat"><h2 class="bl">${S.conns.length}</h2><span class="mu">Total Connections</span></div><div class="card stat"><h2 style="color:var(--gr)">${S.conns.filter(i => prov(i).o).length}</h2><span class="mu">Online Now</span></div><div class="card stat"><h2 style="color:var(--vi)">${nm}</h2><span class="mu">New This Month</span></div></div><input data-in="cq" value="${esc(S.cq)}" placeholder="Search connections..." style="margin-bottom:16px">${L.length ? `<div class="grid g2">${L.map(i => { const p = prov(i); return `<div class="card"><div class="row">${av(p.n, 56, p.o)}<div style="flex:1;min-width:0"><b>${p.n}</b><div class="bl" style="font-size:14px">${p.s}</div><div class="mu" style="font-size:13px">📍${p.l} · Since ${S.cdate[i] || TODAY}</div></div><span class="mu" style="color:${p.o ? 'var(--gr)' : ''}">● ${p.o ? 'Online' : 'Offline'}</span></div><div class="row" style="margin-top:14px"><button class="btn o s" style="flex:1" data-a="msg" data-v="${p.id}">Message</button><a class="btn o s" style="flex:1" href="#/app/profile/${p.id}">View Profile</a></div></div>`; }).join('')}</div>` : empty('No matches.', 'Try another name or skill.')}` : empty('No connections yet.', 'Find a skill to start connecting.'));
+  },
+  
+  fees() {
+    const f = S.fees;
+    return head('Connection Fees', 'Pay per connection to reach providers and seekers.') +
+    `<div class="grid g3 keep" style="margin-bottom:16px"><div class="card stat"><span class="mu">Standard credits</span><h2 class="bl">${f.std}</h2></div><div class="card stat"><span class="mu">Premium credits</span><h2 style="color:var(--vi)">${f.prem}</h2></div><div class="card stat"><span class="mu">Total spent</span><h2 style="color:var(--gr)">${money(f.hist.reduce((a,b) => a + b.a, 0))}</h2></div></div>
+<div class="grid g2">${Object.entries(PLANS).map(([k,p]) => `<div class="card plan ${k == 'prem' ? 'hot' : ''}">${k == 'prem' ? '<span class="tag v">Most popular</span>' : ''}<h3>${p.n}</h3><h1 style="margin:8px 0">${money(p.a)} <span class="mu" style="font-size:14px;font-weight:400">/ connection</span></h1><ul>${p.perks.map(x => `<li>✓ ${x}</li>`).join('')}</ul><button class="btn" style="width:100%" data-a="buy" data-v="${k}">${p.n}</button></div>`).join('')}</div>
+<h3 style="margin:24px 0 12px">Payment history</h3>${f.hist.length ? `<div class="card tblw"><table class="tbl"><tr><th>Date</th><th>Plan</th><th>Amount</th><th>Reference</th><th>Status</th></tr>${f.hist.map(h => `<tr><td>${h.d}</td><td>${h.p}</td><td>${money(h.a)}</td><td>${h.ref}</td><td><span class="pill ok">${h.st}</span></td></tr>`).join('')}</table></div>` : empty('No payments yet.', 'Buy a connection to get started.')}`;
+  },
+  
+  messages() {
+    const ids = Object.keys(S.chats);
+    if (!ids.length) return head('Messages', '') + empty('No messages yet.', 'Connect with someone to start chatting.');
+    
+    if (!S.chats[S.chat]) S.chat = +ids[0];
+    if (innerWidth > 900 || S.mchat) S.unread[S.chat] = 0;
+    
+    const c = prov(S.chat);
+    const q = S.mq.toLowerCase();
+    const L = ids.filter(i => prov(i).n.toLowerCase().includes(q));
+    
+    return head('Messages', '') + `<div class="card msgs"><div class="conv ${S.mchat ? 'hide' : ''}"><div style="padding:12px"><input data-in="mq" value="${esc(S.mq)}" placeholder="Search conversations..."></div>${L.map(i => { const p = prov(i), l = S.chats[i].slice(-1)[0]; return `<div class="item ${i == S.chat ? 'on' : ''}" data-a="chat" data-v="${i}">${av(p.n, 44, p.o)}<div style="flex:1;min-width:0"><div class="row sp"><b style="font-size:14px">${p.n}</b><span class="mu" style="font-size:11px">${l[2]}</span></div><div class="mu" style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(l[1])}</div></div>${S.unread[i] ? `<span class="badge b">${S.unread[i]}</span>` : ''}</div>`; }).join('') || '<div class="empty">No conversations found.</div>'}</div>
+<div class="chat ${S.mchat ? '' : 'hide'}"><div class="row" style="padding:14px 20px;border-bottom:1px solid var(--b)"><button type="button" class="btn o s back" data-a="mback">←</button>${av(c.n, 40, c.o)}<div><b>${c.n}</b><div class="mu" style="font-size:12px;color:${c.o ? 'var(--gr)' : ''}">${c.o ? '● Online' : 'Offline'}</div></div></div><div class="log" id="log">${S.chats[S.chat].map(m => `<div class="bub ${m[0] == 'm' ? 'me' : ''}">${esc(m[1])}<small>${m[2]}</small></div>`).join('')}</div><form data-f="send" class="row" style="padding:14px;border-top:1px solid var(--b)"><button type="button" class="btn o s" data-a="attach" aria-label="Attach file">📎</button><input type="file" id="att" data-att hidden><input id="mi" placeholder="Type a message..." autocomplete="off"><button class="btn">Send</button></form></div></div>`;
+  },
+  
+  opportunities() {
+    const mob = innerWidth <= 900;
+    const q = S.oq.toLowerCase();
+    const L = S.opps.filter(o => (S.ot == 'All' || o.k == S.ot) && (o.t + o.o + o.s + o.l).toLowerCase().includes(q));
+    const o = S.opps.find(x => x.id == S.selOpp) || (mob ? null : L[0]);
+    
+    const mine = o && o.o == S.user.name;
+    const done = o && S.applied.includes(o.id);
+    
+    const detail = o ? `<h2>${esc(o.t)}</h2><div class="bl">${esc(o.o)}</div><div style="margin:10px 0"><span class="tag">${esc(o.s)}</span><span class="tag v">${esc(o.k)}</span><span class="pill ok">${done ? 'Applied' : esc(o.st)}</span></div><p class="mu">${esc(o.d)}</p><div class="item"><span class="mu">Location</span><b style="margin-left:auto">${esc(o.l)}</b></div><div class="item"><span class="mu">Deadline</span><b style="margin-left:auto">${o.dl}</b></div><div class="item"><span class="mu">Budget</span><b style="margin-left:auto;color:var(--gr)">${esc(o.pay)}</b></div><button class="btn" style="width:100%;margin-top:14px" data-a="applym" data-v="${o.id}" ${done || mine ? 'disabled' : ''}>${mine ? 'Your posting' : done ? '✓ Application Sent' : 'Apply / Respond'}</button>` : '<div class="empty"><div style="font-size:40px">🎯</div><h3>Select an opportunity</h3><p>Click on an opportunity to view its full details.</p></div>';
+    
+    const cards = L.length ? L.map(x => `<div class="card cat" style="text-align:left;border-left:3px solid hsl(${hue(x.o)} 70% 55%);${o && x.id == o.id ? 'border-color:var(--bl);border-left-color:var(--bl);box-shadow:0 0 0 1px var(--bl)' : ''}" data-a="opp" data-v="${x.id}"><b>${esc(x.t)}</b><div class="bl" style="font-size:14px">${esc(x.o)}</div><div style="margin:6px 0"><span class="tag">${esc(x.s)}</span><span class="tag v">${esc(x.k)}</span></div><div class="mu" style="font-size:13px">📍${esc(x.l)} · 🕑 ${x.dl}</div><div class="row sp" style="margin-top:6px"><span style="color:var(--gr);font-size:14px">${esc(x.pay)}</span><span class="row" style="gap:6px"><button class="btn o s" data-a="opp" data-v="${x.id}">View Details</button><button class="btn s" data-a="applym" data-v="${x.id}" ${S.applied.includes(x.id) || x.o == S.user.name ? 'disabled' : ''}>${S.applied.includes(x.id) ? 'Applied' : 'Apply'}</button></span></div></div>`).join('') : empty('No opportunities found.', 'Try another search or filter.');
+    
+    return head('Opportunities', 'Browse projects, freelance work and skill-based opportunities from people, businesses and organizations.', '<button class="btn" data-a="postm">＋ Post Opportunity</button>') + `<input data-in="oq" value="${esc(S.oq)}" placeholder="Search opportunities..."><div class="chips">${['All',...OTYPES].map(t => `<span class="chip ${S.ot == t ? 'on' : ''}" data-a="otype" data-v="${t}">${t}</span>`).join('')}</div>` + (mob && o ? `<a class="bl" data-a="opp" data-v="">← All opportunities</a><div class="card" style="margin-top:12px">${detail}</div>` : `<div class="grid split2" style="align-items:start"><div class="grid">${cards}</div>${mob ? '' : `<div class="card" style="position:sticky;top:20px">${detail}</div>`}</div>`);
+  },
+  
+  reviews() {
+    S.star = 0;
+    const r = S.reviews;
+    const a = (r.reduce((x,y) => x + y.r, 0) / (r.length || 1)).toFixed(1);
+    const In = S.rtab == 'in';
+    const L = In ? r : S.given;
+    
+    return head('Reviews & Feedback', 'Build trust through honest reviews and testimonials.') + `<div class="grid split3" style="align-items:start"><div class="grid"><div class="card"><div class="row wrap" style="gap:24px"><div><h1 style="font-size:46px">${r.length ? a : '—'}</h1><div style="color:var(--am)">${r.length ? stars(Math.round(a)) : ''}</div><div class="mu">${r.length} reviews</div></div><div style="flex:1;min-width:200px;display:grid;gap:4px">${[5,4,3,2,1].map(n => { const c = r.filter(x => x.r == n).length; return `<div class="dist"><span>${n}</span><div class="bar"><i style="width:${r.length ? c/r.length*100 : 0}%;background:var(--am)"></i></div><span>${c}</span></div>`; }).join('')}</div></div></div>
+<div class="chips" style="margin:0"><span class="chip ${In ? 'on' : ''}" data-a="rtab" data-v="in">Received (${r.length})</span><span class="chip ${!In ? 'on' : ''}" data-a="rtab" data-v="out">Given (${S.given.length})</span></div>
+${L.length ? L.map(x => `<div class="card"><div class="row">${av(In ? x.n : x.to, 40)}<div style="flex:1"><b>${esc(In ? x.n : 'To ' + x.to)}</b><div class="mu" style="font-size:12px">${x.d} · ${esc(x.s)}</div></div><span style="color:var(--am)">${stars(x.r)}</span></div><p class="mu" style="margin-top:10px">"${esc(x.t)}"</p></div>`).join('') : empty('No reviews yet.', In ? 'Reviews appear after completed work.' : 'Leave a review for someone you worked with.')}</div>
+<form class="card" data-f="review" novalidate><h3>Leave a Review</h3>${S.conns.length ? '' : '<p class="mu" style="margin-top:8px">Connect with someone first to leave a review.</p>'}<label>Who are you reviewing?</label><select name="to"><option value="">Select a connection</option>${S.conns.map(i => `<option>${prov(i).n}</option>`).join('')}</select><div class="err" id="e-to"></div><label>Your Rating</label><div id="stars">${[1,2,3,4,5].map(i => `<span class="star" data-a="star" data-v="${i}">★</span>`).join('')}</div><div class="err" id="e-r"></div><label>Skill / Service</label><input name="s" placeholder="e.g. Graphic Design"><label>Your Review</label><textarea name="t" rows="4" placeholder="Share your honest experience..."></textarea><div class="err" id="e-t"></div><button class="btn" style="width:100%;margin-top:14px">➤ Submit Review</button></form></div>`;
+  },
+  
+  notifications() {
+    const N = S.notes;
+    const nw = N.filter(n => n.n);
+    const old = N.filter(n => !n.n);
+    const row = n => `<div class="card row" style="padding:14px;cursor:pointer;${n.n ? '' : 'opacity:.65'}" data-a="read" data-v="${N.indexOf(n)}"><div class="ico" style="margin:0">${n.i}</div><div style="flex:1"><b style="font-size:15px">${esc(n.m)}</b><div class="mu" style="font-size:12px">${n.w}</div></div>${n.n ? '<span class="dot" style="position:static;background:var(--bl)"></span>' : ''}</div>`;
+    
+    return head('Notifications', 'Stay updated on your SkillBridge activity.', nw.length ? '<button class="btn o s" data-a="readall">Mark all as read</button>' : '') + (N.length ? `${nw.length ? `<div class="mu" style="margin-bottom:8px;font-weight:700">NEW · ${nw.length}</div><div class="grid" style="margin-bottom:18px">${nw.map(row).join('')}</div>` : ''}${old.length ? `<div class="mu" style="margin-bottom:8px;font-weight:700">EARLIER</div><div class="grid">${old.map(row).join('')}</div>` : ''}` : empty('No notifications.', "You're all caught up."));
+  },
+  
+  settings() {
+    const u = S.user, T = S.stab;
+    const tabs = [['profile','👤','Profile'],['account','🔑','Account'],['privacy','🔒','Privacy'],['notif','🔔','Notifications']];
+    let b = '';
+    
+    if (T == 'profile') {
+      b = `<form data-f="settings" novalidate><h3>Profile Information</h3><div class="row" style="margin:12px 0">${uav(72)}<div><button type="button" class="btn o s" data-a="ph">📷 Change Photo</button><div class="mu" style="font-size:12px;margin-top:4px">JPG, PNG up to 5MB</div></div><input type="file" id="ph" accept="image/*" data-photo hidden></div><div class="grid g2"><div><label>Full Name</label><input name="name" value="${esc(u.name)}"><div class="err" id="e-name"></div></div><div><label>Location</label><input name="loc" value="${esc(u.loc)}"></div><div><label>Phone Number</label><input name="phone" value="${esc(u.phone)}"></div><div><label>Website</label><input name="web" value="${esc(u.website)}" placeholder="https://yoursite.com"></div></div><label>Bio</label><textarea name="bio" rows="3">${esc(u.bio)}</textarea><label>Account Role</label><div class="seg">${['I provide skills','I need skills','Both'].map(r => `<button type="button" data-a="srole" data-v="${r}" class="${(u.role == 'Provider' ? 'I provide skills' : u.role == 'Seeker' ? 'I need skills' : 'Both') == r ? 'on' : ''}">${r}</button>`).join('')}</div><button class="btn" style="margin-top:18px">💾 Save Changes</button></form>`;
+    } else if (T == 'account') {
+      b = `<h3>Account</h3><label>Email</label><input value="${esc(u.email)}" disabled><form data-f="pw" novalidate><h3 style="margin-top:22px">Change password</h3><label>Current password</label><input name="cur" type="password"><div class="err" id="e-cur"></div><label>New password</label><input name="np" type="password"><div class="err" id="e-np"></div><label>Confirm new password</label><input name="np2" type="password"><div class="err" id="e-np2"></div><button class="btn" style="margin-top:14px">Update password</button></form><div class="card" style="margin-top:24px;border-color:rgba(244,63,94,.5)"><h3 style="color:var(--rd)">Danger zone</h3><p class="mu" style="margin:6px 0 12px">Deleting your account removes your profile, skills and connections.</p><button class="btn r" data-a="delacc">Delete my account</button></div>`;
+    } else if (T == 'privacy') {
+      b = `<h3>Privacy</h3>${tog('phoneConn','Show my phone number only to connections','Others will not see your number until you connect.')}${tog('searchable','Show my profile in search results','Turn off to hide your profile from Find a Skill.')}${tog('online','Show when I am online','Let connections see your online status.')}${tog('msgAny','Allow messages from anyone','Off means only connections can message you.')}`;
+    } else if (T == 'notif') {
+      b = `<h3>Notifications</h3>${tog('nReq','Connection requests','When someone sends or accepts a request.')}${tog('nMsg','New messages','When you receive a message.')}${tog('nOpp','Opportunity matches','When a new opportunity matches your skills.')}${tog('nRev','Reviews','When you receive a new review.')}${tog('nEmail','Email notifications','Also send updates to your email.')}`;
+    }
+    
+    return head('Settings', 'Manage your account preferences and privacy settings.') + `<div class="grid setgrid" style="align-items:start"><div class="card tabs" style="padding:10px">${tabs.map(t => `<a data-a="stab" data-v="${t[0]}" class="${T == t[0] ? 'on' : ''}">${t[1]} ${t[2]}</a>`).join('')}</div><div class="card">${b}</div></div>`;
+  }
+};
+
+/* ============ 7. MODALS ============ */
+function modalHTML() {
+  const m = S.modal;
+  if (!m) return '';
+  
+  let c = '', cls = 'modal';
+  const X = '<button type="button" class="btn o" data-a="closem">Cancel</button>';
+  
+  if (m.t == 'more') {
+    cls += ' sheet';
+    c = `<div class="grid g2" style="gap:6px">${NAV.map(n => `<a href="#/app/${n[0]}" class="item" style="border:0;padding:12px 8px"><span>${n[1]}</span>${n[2]}${bdg(n[0])}</a>`).join('')}<a data-a="logout" class="item" style="border:0;padding:12px 8px"><span>⏻</span>Logout</a></div>`;
+  } else if (m.t == 'pay') {
+    const p = PLANS[m.k];
+    c = `<form data-f="pay" novalidate><h3>Pay for ${p.n}</h3><h1 style="margin:6px 0;color:var(--gr)">${money(p.a)}</h1><p class="mu">You will get an M-Pesa prompt on your phone. Enter your PIN to complete payment (simulated).</p><label>M-Pesa phone number</label><input name="phone" value="${esc(S.user.phone.replace(/\s/g,''))}" placeholder="07XX XXX XXX"><div class="err" id="e-phone"></div><div class="row" style="margin-top:18px">${X}<button class="btn" style="flex:1">Pay ${money(p.a)}</button></div></form>`;
+  } else if (m.t == 'connect') {
+    const p = prov(m.id), f = S.fees, none = !f.std && !f.prem;
+    c = `<form data-f="connectsend" novalidate><div class="row">${av(p.n, 52)}<div><h3>Connect with ${p.n}</h3><div class="bl" style="font-size:14px">${p.s} · ${p.l}</div></div></div><label>Message</label><textarea name="m" rows="3">Hi ${esc(p.n.split(' ')[0])}, I'd like to connect with you on SkillBridge.</textarea><label>Connection type</label><select name="plan"><option value="std" ${f.std ? '' : 'disabled'}>Standard (${money(PLANS.std.a)}) — you have ${f.std}</option><option value="prem" ${f.prem ? '' : 'disabled'} ${!f.std && f.prem ? 'selected' : ''}>Premium (${money(PLANS.prem.a)}) — you have ${f.prem}</option></select>${none ? `<div class="err">You have no connection credits. Buy one to send a request.</div>` : '<p class="mu" style="margin-top:8px">Sending a request uses 1 connection credit.</p>'}<div class="row" style="margin-top:18px">${X}${none ? '<a class="btn" style="flex:1" href="#/app/fees">Buy a connection</a>' : '<button class="btn" style="flex:1">Send request</button>'}</div></form>`;
+  } else if (m.t == 'svc') {
+    const p = prov(m.id);
+    c = `<form data-f="svcsend" novalidate><h3>Request a service from ${p.n}</h3><label>What do you need?</label><textarea name="d" rows="4" placeholder="Describe the service, timing and any details"></textarea><div class="err" id="e-d"></div><label>Budget (optional)</label><input name="b" placeholder="e.g. KES 10,000"><div class="row" style="margin-top:18px">${X}<button class="btn" style="flex:1">Send request</button></div></form>`;
+  } else if (m.t == 'report') {
+    const p = prov(m.id);
+    c = `<form data-f="reportsend" novalidate><h3>Report ${p.n}</h3><label>Reason</label><select name="why"><option>Spam or scam</option><option>Misleading profile</option><option>Inappropriate behavior</option><option>Other</option></select><label>Details</label><textarea name="d" rows="3" placeholder="Tell us what happened"></textarea><div class="err" id="e-d"></div><div class="row" style="margin-top:18px">${X}<button class="btn r" style="flex:1">Submit report</button></div></form>`;
+  } else if (m.t == 'apply') {
+    const o = S.opps.find(x => x.id == m.id);
+    c = `<form data-f="applysend" novalidate><h3>Apply: ${esc(o.t)}</h3><div class="bl" style="font-size:14px">${esc(o.o)}</div><label>Why are you a good fit?</label><textarea name="m" rows="4" placeholder="Share your experience and availability"></textarea><div class="err" id="e-m"></div><div class="row" style="margin-top:18px">${X}<button class="btn" style="flex:1">Send application</button></div></form>`;
+  } else if (m.t == 'post') {
+    c = `<form data-f="postopp" novalidate><h3>Post an Opportunity</h3><label>Title *</label><input name="t"><div class="err" id="e-t"></div><label>Required skill *</label><input name="s" placeholder="e.g. Web Development"><div class="err" id="e-s"></div><div class="grid g2"><div><label>Type</label><select name="k">${opts(OTYPES)}</select></div><div><label>Location</label><input name="l" placeholder="Nairobi / Remote"></div><div><label>Deadline *</label><input name="dl" type="date" min="${TODAY}"><div class="err" id="e-dl"></div></div><div><label>Budget</label><input name="pay" placeholder="e.g. KES 20,000"></div></div><label>Description *</label><textarea name="d" rows="3"></textarea><div class="err" id="e-d"></div><div class="row" style="margin-top:16px">${X}<button class="btn" style="flex:1">Post</button></div></form>`;
+  } else if (m.t == 'done') {
+    c = `<div style="text-align:center"><div style="font-size:44px">${m.ic || '✓'}</div><h2 style="margin:8px 0">${m.title}</h2><p class="mu">${m.msg}</p><div class="row" style="margin-top:18px;justify-content:center;flex-wrap:wrap">${(m.btns || []).map((b,i) => b[1] ? `<a class="btn ${i ? 'o' : ''}" href="${b[1]}">${b[0]}</a>` : `<button class="btn ${i ? 'o' : ''}" data-a="closem">${b[0]}</button>`).join('')}</div></div>`;
+  } else if (m.t == 'blog') {
+    const b = BLOG[m.i];
+    c = `<span class="tag v">${b[1]}</span><h2 style="margin:8px 0">${b[0]}</h2><p class="mu">${b[2]}</p><button class="btn" style="margin-top:16px" data-a="closem">Close</button>`;
+  } else if (m.t == 'user') {
+    const u = S.users[m.i];
+    c = `<div class="row">${av(u.n, 56)}<div><h3>${esc(u.n)}</h3><div class="mu">${esc(u.l)} · ${esc(u.r)}</div></div></div><div class="item"><span class="mu">Status</span><span class="pill ${u.s == 'Active' ? 'ok' : 'no'}" style="margin-left:auto">${u.s}</span></div><div class="item"><span class="mu">Joined</span><b style="margin-left:auto">${u.j}</b></div><div class="row wrap" style="margin-top:14px"><button class="btn o" data-a="usr" data-v="${m.i}">${u.s == 'Active' ? 'Suspend' : 'Activate'}</button><button class="btn r" data-a="udel" data-v="${m.i}">Delete</button><button class="btn o" data-a="closem">Close</button></div>`;
+  } else if (m.t == 'inv') {
+    const r = S.reports[m.i];
+    c = `<h3>Report #${r.id}</h3><div class="item"><span class="mu">Subject</span><b style="margin-left:auto">${esc(r.w)}</b></div><div class="item"><span class="mu">Type</span><b style="margin-left:auto">${r.ty}</b></div><div class="item"><span class="mu">Reason</span><b style="margin-left:auto">${esc(r.why)}</b></div><div class="item"><span class="mu">Reported by</span><b style="margin-left:auto">${esc(r.by)} · ${r.d}</b></div><p class="mu" style="margin:10px 0">${esc(r.det || '')}</p><div class="row wrap"><button class="btn o s" data-a="rdis" data-v="${m.i}">Dismiss</button><button class="btn o s" data-a="rwarn" data-v="${m.i}">Warn user</button><button class="btn r s" data-a="rban" data-v="${m.i}">${r.ty == 'User' ? 'Suspend user' : 'Remove content'}</button><button class="btn o s" data-a="closem">Close</button></div>`;
+  }
+  
+  return `<div class="${cls}" data-a="closem" role="dialog" aria-modal="true"><div class="card">${c}</div></div>`;
+}
+
+/* ============ 8. ADMIN ============ */
+const ANAV = [
+  ['dash','▦','Dashboard'],
+  ['users','👥','Users'],
+  ['skills','▤','Skills'],
+  ['categories','🏷','Categories'],
+  ['requests','➤','Requests'],
+  ['connections','⇄','Connections'],
+  ['opps','◎','Opportunities'],
+  ['reports','⚑','Reports'],
+  ['msgrep','✉','Messages/Reports'],
+  ['fees','💳','Fees'],
+  ['settings','⚙','Settings']
+];
+
+const tbl = (h, rows) => rows.length ? `<div class="card tblw"><table class="tbl"><tr>${h.map(x => `<th>${x}</th>`).join('')}</tr>${rows.join('')}</table></div>` : empty('Nothing here yet.', '');
+
+function admin() {
+  const T = S.adminTab;
+  const openR = S.reports.filter(r => r.st == 'Open').length + S.flagged.filter(r => r.st == 'Open').length;
+  let b = '';
+  
+  const reqs = [...S.areq, ...S.sent.map(s => ({f: S.user.name, t: prov(s.id).n, d: s.d, st: 'Pending'})), ...S.inc.map(s => ({f: prov(s.id).n, t: S.user.name, d: s.d, st: 'Pending'}))];
+  const cons = [...S.aconn, ...S.conns.map(i => ({a: S.user.name, b: prov(i).n, d: S.cdate[i] || TODAY}))];
+  
+  if (T == 'dash') {
+    b = `<h1 style="margin-bottom:18px">Admin Dashboard</h1><div class="grid g4 keep">${[['Total users',S.users.length+1240],['Active users',S.users.filter(u => u.s == 'Active').length+980],['Skill listings',allSkills().length+310],['Connection requests',reqs.length+86],['Active connections',cons.length+412],['Opportunities',S.opps.length],['Reported content',openR],['Revenue',money(S.allPay.reduce((a,x) => a + x.a, 0))]].map(s => `<div class="card stat"><span class="mu">${s[0]}</span><h2>${s[1]}</h2></div>`).join('')}</div><div class="grid g2" style="margin-top:16px"><div class="card"><h3>Recent registrations</h3>${S.users.slice(0,4).map(u => `<div class="item">${av(u.n,36)}<div style="flex:1"><b>${esc(u.n)}</b><div class="mu" style="font-size:12px">${esc(u.l)} · ${u.j}</div></div><span class="pill ${u.s == 'Active' ? 'ok' : 'no'}">${u.s}</span></div>`).join('')}</div><div class="card"><div class="row sp"><h3>Open reports</h3><a class="bl" data-a="atab" data-v="reports">View all →</a></div>${S.reports.filter(r => r.st == 'Open').map(r => `<div class="item"><div style="flex:1"><b>${esc(r.w)}</b><div class="mu" style="font-size:12px">${esc(r.why)}</div></div><button class="btn o s" data-a="inv" data-v="${S.reports.indexOf(r)}">Investigate</button></div>`).join('') || '<div class="empty">No open reports.</div>'}</div></div>`;
+  } else if (T == 'users') {
+    const q = S.us.toLowerCase();
+    const rows = S.users.map((u,i) => [u,i]).filter(([u]) => u.n.toLowerCase().includes(q));
+    b = `<h1 style="margin-bottom:14px">Users</h1><input data-in="us" value="${esc(S.us)}" placeholder="Search users..." style="margin-bottom:14px">` + tbl(['Name','Location','Role','Status','Actions'], rows.map(([u,i]) => `<tr><td>${esc(u.n)}</td><td>${esc(u.l)}</td><td>${esc(u.r)}</td><td><span class="pill ${u.s == 'Active' ? 'ok' : 'no'}">${u.s}</span></td><td><div class="row"><button class="btn o s" data-a="uview" data-v="${i}">View</button><button class="btn o s" data-a="usr" data-v="${i}">${u.s == 'Active' ? 'Suspend' : 'Activate'}</button><button class="btn r s" data-a="udel" data-v="${i}">Delete</button></div></td></tr>`));
+  } else if (T == 'skills') {
+    const L = allSkills();
+    b = `<h1 style="margin-bottom:14px">Skills</h1>` + tbl(['Listing','Owner','Category','Status','Actions'], L.map((s,i) => `<tr><td>${esc(s.t)}</td><td>${esc(s.o)}</td><td>${esc(s.c)}</td><td><span class="pill ${s.st == 'Active' ? 'ok' : 'bz'}">${s.st}</span></td><td><div class="row"><button class="btn o s" data-a="askedit" data-v="${i}">Edit</button><button class="btn r s" data-a="askdel" data-v="${i}">Remove</button></div></td></tr>`));
+  } else if (T == 'categories') {
+    const L = allSkills();
+    b = `<h1 style="margin-bottom:14px">Categories</h1><div class="row" style="margin-bottom:14px"><input id="nc" placeholder="New category name"><button class="btn" data-a="addcat">Add</button></div>` + tbl(['Category','Listings','Action'], S.cats.map((c,i) => `<tr><td>${esc(c)}</td><td>${L.filter(s => s.c == c).length}</td><td><button class="btn r s" data-a="delcat" data-v="${i}">Delete</button></td></tr>`));
+  } else if (T == 'requests') {
+    b = `<h1 style="margin-bottom:14px">Connection &amp; Service Requests</h1>` + tbl(['From','To','Type','Date','Status'], [...reqs.map(r => `<tr><td>${esc(r.f)}</td><td>${esc(r.t)}</td><td>Connection</td><td>${r.d}</td><td><span class="pill ${r.st == 'Accepted' ? 'ok' : r.st == 'Rejected' ? 'no' : 'bz'}">${r.st}</span></td></tr>`), ...S.svc.map(r => `<tr><td>${esc(S.user.name)}</td><td>${esc(r.to)}</td><td>Service</td><td>${r.d}</td><td><span class="pill bz">Pending</span></td></tr>`)]);
+  } else if (T == 'connections') {
+    b = `<h1 style="margin-bottom:14px">Active Connections</h1>` + tbl(['Person A','Person B','Since'], cons.map(c => `<tr><td>${esc(c.a)}</td><td>${esc(c.b)}</td><td>${c.d}</td></tr>`));
+  } else if (T == 'opps') {
+    b = `<h1 style="margin-bottom:14px">Opportunities</h1>` + tbl(['Title','Posted by','Skill','Deadline','Budget','Action'], S.opps.map((o,i) => `<tr><td>${esc(o.t)}</td><td>${esc(o.o)}</td><td>${esc(o.s)}</td><td>${o.dl}</td><td>${esc(o.pay)}</td><td><button class="btn r s" data-a="aodel" data-v="${i}">Remove</button></td></tr>`));
+  } else if (T == 'reports') {
+    b = `<h1 style="margin-bottom:14px">Reports</h1>` + tbl(['Subject','Reason','By','Date','Status','Action'], S.reports.map((r,i) => `<tr><td>${esc(r.w)}</td><td>${esc(r.why)}</td><td>${esc(r.by)}</td><td>${r.d}</td><td><span class="pill ${r.st == 'Open' ? 'bz' : 'ok'}">${r.st}</span></td><td>${r.st == 'Open' ? `<div class="row"><button class="btn o s" data-a="inv" data-v="${i}">Investigate</button><button class="btn g s" data-a="rres" data-v="${i}">Resolve</button></div>` : '—'}</td></tr>`));
+  } else if (T == 'msgrep') {
+    b = `<h1 style="margin-bottom:14px">Messages / Reports</h1><p class="mu" style="margin-bottom:12px">Messages flagged as spam, scams or abuse.</p>` + tbl(['From','To','Message','Reason','Status','Action'], S.flagged.map((m,i) => `<tr><td>${esc(m.f)}</td><td>${esc(m.t)}</td><td>${esc(m.m)}</td><td>${esc(m.why)}</td><td><span class="pill ${m.st == 'Open' ? 'bz' : 'ok'}">${m.st}</span></td><td>${m.st == 'Open' ? `<div class="row"><button class="btn o s" data-a="fdis" data-v="${i}">Dismiss</button><button class="btn r s" data-a="fdel" data-v="${i}">Delete &amp; suspend</button></div>` : '—'}</td></tr>`));
+  } else if (T == 'fees') {
+    const tot = S.allPay.reduce((a,x) => a + x.a, 0);
+    b = `<h1 style="margin-bottom:14px">Connection Fees</h1><div class="grid g3 keep" style="margin-bottom:16px"><div class="card stat"><span class="mu">Total revenue</span><h2 style="color:var(--gr)">${money(tot)}</h2></div><div class="card stat"><span class="mu">Standard sold (${money(PLANS.std.a)})</span><h2>${S.allPay.filter(x => x.p == PLANS.std.n).length}</h2></div><div class="card stat"><span class="mu">Premium sold (${money(PLANS.prem.a)})</span><h2 style="color:var(--vi)">${S.allPay.filter(x => x.p == PLANS.prem.n).length}</h2></div></div>` + tbl(['Date','User','Plan','Amount','Ref'], S.allPay.map(x => `<tr><td>${x.d}</td><td>${esc(x.u)}</td><td>${x.p}</td><td>${money(x.a)}</td><td>${x.ref}</td></tr>`));
+  } else if (T == 'settings') {
+    b = `<h1 style="margin-bottom:14px">Admin Settings</h1><form class="card" data-f="afees" novalidate><h3>Connection fees (KES)</h3><div class="grid g2"><div><label>Standard connection</label><input name="std" type="number" value="${PLANS.std.a}"></div><div><label>Premium connection</label><input name="prem" type="number" value="${PLANS.prem.a}"></div></div><div class="err" id="e-std"></div><button class="btn" style="margin-top:14px">Save fees</button></form><div class="card" style="margin-top:16px"><h3>Platform</h3>${tog('reg','Allow new registrations','Turn off to close sign-ups.','apref')}${tog('verify','Require admin verification of new providers','New providers appear after approval.','apref')}${tog('maint','Maintenance mode','Show a maintenance notice to users.','apref')}</div>`;
+  }
+  
+  return `<div class="amob">${ANAV.map(t => `<span class="chip ${T == t[0] ? 'on' : ''}" data-a="atab" data-v="${t[0]}">${t[2]}</span>`).join('')}<span class="chip" data-a="alogout">Logout</span></div><div class="app"><aside class="side"><a class="logo" href="#/admin" style="padding:6px 8px;margin-bottom:6px">${HEX}<span>Admin<b> Panel</b></span></a>${ANAV.map(n => `<a data-a="atab" data-v="${n[0]}" class="${T == n[0] ? 'on' : ''}"><span>${n[1]}</span>${n[2]}</a>`).join('')}<a data-a="alogout" style="margin-top:auto"><span>⏻</span>Logout</a></aside><main class="main">${b}</main></div>${modalHTML()}`;
+}
+
+/* ============ 9. ROUTER ============ */
+const PUB = {
+  '/': landing,
+  '/login': login,
+  '/forgot': forgot,
+  '/setup': setup,
+  '/admin-login': adminLogin,
+  '/about': about,
+  '/contact': contact,
+  '/help': help,
+  '/blog': blog,
+  '/privacy': () => legal('privacy'),
+  '/terms': () => legal('terms'),
+  '/cookies': () => legal('cookies')
+};
+
+function render() {
+  const h = location.hash.slice(1) || '/';
+  const a = h.split('/');
+  let html;
+  
+  if (h == '/signup') {
+    S.signRole = 'Both';
+    html = signup();
+  } else if (PUB[h]) {
+    html = PUB[h]();
+  } else if (h == '/admin') {
+    if (!S.admin) {
+      go('/admin-login');
+      return;
+    }
+    html = admin();
+  } else if (a[1] == 'app') {
+    if (!S.logged) {
+      go('/login');
+      return;
+    }
+    const pg = a[2] || 'dashboard';
+    html = shell(pg, (pages[pg] || pages.dashboard)(a[3]));
+  } else {
+    html = landing();
+  }
+  
+  root.innerHTML = html;
+  window.scrollTo(0,0);
+  decorate();
+  const l = $('#log');
+  if (l) l.scrollTop = l.scrollHeight;
+}
+
+window.addEventListener('hashchange', () => {
+  S.modal = null;
+  render();
+});
+
+const re = () => {
+  const y = scrollY;
+  render();
+  scrollTo(0, y);
+};
+
+const keepq = () => {
+  const q = $('#q');
+  if (q) S.q = q.value;
+};
+
+function done(ic, title, msg, btns) {
+  S.modal = {t: 'done', ic, title, msg, btns};
+  re();
+}
+
+function simAccept(id) {
+  setTimeout(() => {
+    if (!S.logged || !S.sent.some(s => s.id == id)) return;
+    const p = prov(id);
+    if (!p.a) return;
+    
+    S.sent = S.sent.filter(s => s.id != id);
+    S.conns.push(id);
+    S.cdate[id] = TODAY;
+    S.chats[id] = [['t','Hi! Thanks for connecting. How can I help?','Now']];
+    S.unread[id] = 1;
+    
+    S.notes.unshift({i: '✓', m: `${p.n} accepted your connection request.`, w: 'Just now', n: 1, l: '#/app/connections'});
+    toast(`✓ ${p.n} accepted your request`);
+    
+    if (/#\/app\/(requests|connections|dashboard|notifications|find)/.test(location.hash) && !S.modal) re();
+  }, 5000);
+}
+
+function saveSkill(f, status) {
+  const v = n => f[n]?.value.trim();
+  const dr = status == 'Draft';
+  const e = {
+    t: !v('t') ? 'Title is required' : '',
+    c: !dr && !v('c') ? 'Choose a category' : '',
+    d: !dr && v('d').length < 20 ? 'Describe your skill (at least 20 characters)' : ''
+  };
+  
+  if (!showE(f, e)) return;
+  
+  const id = +v('id');
+  const o = {
+    t: v('t'),
+    c: v('c') || 'Other',
+    d: v('d'),
+    ty: v('ty'),
+    exp: v('exp'),
+    loc: v('loc'),
+    av: v('av'),
+    rate: v('rate'),
+    ct: v('ct'),
+    st: status
+  };
+  
+  if (f.files && f.files.files.length) S.portfolio = true;
+  
+  if (id) {
+    Object.assign(S.skills.find(s => s.id == id), o);
+    toast(dr ? 'Draft saved' : 'Skill updated');
+  } else {
+    S.skills.push({id: Date.now(), v: 0, r: 0, ...o});
+    toast(dr ? 'Saved as draft' : 'Skill published!');
+  }
+  
+  go('/app/myskills');
+}
+
+/* ============ 10. ACTIONS ============ */
+const A = {
+  sc(v) {
+    $('#mm')?.classList.remove('open');
+    const f = () => v == 'top' ? scrollTo({top: 0, behavior: 'smooth'}) : $('#' + v)?.scrollIntoView({behavior: 'smooth'});
+    if ((location.hash || '#/').length > 2) {
+      go('/');
+      setTimeout(f, 80);
+    } else {
+      f();
+    }
+  },
+  
+  burger() {
+    $('#mm').classList.toggle('open');
+  },
+  
+  collapse() {
+    S.collapsed = !S.collapsed;
+    re();
+  },
+  
+  more() {
+    S.modal = {t: 'more'};
+    re();
+  },
+  
+  closem(v, t, e) {
+    if (t.classList.contains('modal') && e && e.target !== t) return;
+    S.modal = null;
+    re();
+  },
+  
+  role(v, t) {
+    S.signRole = v;
+    document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b == t));
+  },
+  
+  prole(v, t) {
+    S.signRole = v;
+    document.querySelectorAll('#pseg button').forEach(b => b.classList.toggle('on', b == t));
+  },
+  
+  srole(v) {
+    const f = document.querySelector('[data-f=settings]');
+    if (f) {
+      Object.assign(S.user, {
+        name: f.name.value.trim() || S.user.name,
+        loc: f.loc.value.trim(),
+        phone: f.phone.value.trim(),
+        website: f.web.value.trim(),
+        bio: f.bio.value.trim()
+      });
+    }
+    S.user.role = v == 'I provide skills' ? 'Provider' : v == 'I need skills' ? 'Seeker' : 'Both';
+    toast('Role set to "' + v + '"');
+    re();
+  },
+  
+  stab(v) {
+    S.stab = v;
+    re();
+  },
+  
+  ph() {
+    $('#ph').click();
+  },
+  
+  attach() {
+    $('#att').click();
+  },
+  
+  logout() {
+    S.logged = false;
+    S.modal = null;
+    toast('Logged out');
+    go('/');
+  },
+  
+  alogout() {
+    S.admin = false;
+    go('/');
+  },
+  
+  delacc() {
+    if (confirm('Delete your account? This cannot be undone.')) {
+      S.users = S.users.filter(u => u.n != S.user.name);
+      S.logged = false;
+      toast('Account deleted');
+      go('/');
+    }
+  },
+  
+  blog(i) {
+    S.modal = {t: 'blog', i: +i};
+    re();
+  },
+  
+  cat(v) {
+    keepq();
+    S.cat = v;
+    re();
+  },
+  
+  fl(v, t) {
+    keepq();
+    S[v] = t.value;
+    re();
+  },
+  
+  fopen() {
+    keepq();
+    S.fo = !S.fo;
+    re();
+  },
+  
+  fclear() {
+    keepq();
+    S.cat = 'All';
+    S.avail = '';
+    S.loc = '';
+    S.exp = '';
+    S.sty = '';
+    re();
+  },
+  
+  connect(id) {
+    id = +id;
+    if (S.conns.includes(id)) return toast('Already connected');
+    if (S.sent.some(s => s.id == id)) return toast('Request already sent', 1);
+    keepq();
+    S.modal = {t: 'connect', id};
+    re();
+  },
+  
+  svcm(id) {
+    S.modal = {t: 'svc', id: +id};
+    re();
+  },
+  
+  reportm(id) {
+    S.modal = {t: 'report', id: +id};
+    re();
+  },
+  
+  msg(id) {
+    id = +id;
+    if (!S.conns.includes(id)) {
+      toast(`Connect with ${prov(id).n} first to start messaging`, 1);
+      return A.connect(id);
+    }
+    if (!S.chats[id]) {
+      S.chats[id] = [['t','Hi! How can I help you?','Now']];
+      S.unread[id] = 0;
+    }
+    S.chat = id;
+    S.mchat = true;
+    go('/app/messages');
+  },
+  
+  chat(v) {
+    S.chat = +v;
+    S.unread[v] = 0;
+    S.mchat = true;
+    re();
+  },
+  
+  mback() {
+    S.mchat = false;
+    re();
+  },
+  
+  tab(v) {
+    S.tab = v;
+    re();
+  },
+  
+  accept(id) {
+    id = +id;
+    S.inc = S.inc.filter(r => r.id != id);
+    S.conns.push(id);
+    S.cdate[id] = TODAY;
+    S.notes.unshift({i: '✓', m: `You are now connected with ${prov(id).n}.`, w: 'Just now', n: 1, l: '#/app/connections'});
+    done('🤝', 'Connected!', `You are now connected with ${prov(id).n}. You can message each other.`, [['Message ' + prov(id).n.split(' ')[0], '#/app/messages'], ['Close', null]]);
+    S.chat = id;
+    if (!S.chats[id]) {
+      S.chats[id] = [['t','Thanks for connecting!','Now']];
+      S.unread[id] = 0;
+    }
+  },
+  
+  reject(id) {
+    S.inc = S.inc.filter(r => r.id != id);
+    toast('Request rejected');
+    re();
+  },
+  
+  cancel(id) {
+    S.sent = S.sent.filter(r => r.id != id);
+    toast('Request cancelled');
+    re();
+  },
+  
+  pause(id) {
+    const k = S.skills.find(s => s.id == id);
+    k.st = k.st == 'Paused' || k.st == 'Draft' ? 'Active' : 'Paused';
+    toast(`Skill is now ${k.st == 'Active' ? 'active' : 'paused'}`);
+    re();
+  },
+  
+  delsk(id) {
+    if (confirm('Delete this skill?')) {
+      S.skills = S.skills.filter(s => s.id != id);
+      toast('Skill deleted');
+      re();
+    }
+  },
+  
+  draft() {
+    const f = $('[data-f=offer]');
+    saveSkill(f, 'Draft');
+  },
+  
+  opp(v) {
+    S.selOpp = v ? +v : null;
+    re();
+  },
+  
+  postm() {
+    S.modal = {t: 'post'};
+    re();
+  },
+  
+  applym(v) {
+    S.modal = {t: 'apply', id: +v};
+    re();
+  },
+  
+  otype(v) {
+    S.ot = v;
+    re();
+  },
+  
+  star(v) {
+    S.star = +v;
+    document.querySelectorAll('#stars .star').forEach((s,i) => s.classList.toggle('on', i < v));
+  },
+  
+  rtab(v) {
+    S.rtab = v;
+    re();
+  },
+  
+  read(i) {
+    const n = S.notes[i];
+    n.n = 0;
+    if (n.l) go(n.l);
+    else re();
+  },
+  
+  readall() {
+    S.notes.forEach(n => n.n = 0);
+    re();
+  },
+  
+ async buy(k) {
+  const p = PLANS[k];
+  const phoneNumber = S.user.phone.replace(/\s/g, '');
+  
+  // Show confirmation
+  if (!confirm(`Pay ${money(p.a)} for ${p.n}?\n\nAn M-Pesa prompt will be sent to ${phoneNumber}.\n\nCancel to stop.`)) {
+    return;
+  }
+
+  // Use user ID 1 for testing (replace with real auth in production)
+  const userId = 1;
+
+  try {
+    const response = await fetch('http://localhost:3000/api/payment/initiate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: userId,
+        amount: p.a,
+        phoneNumber: phoneNumber,
+        accountReference: p.n
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      if (data.isSimulation) {
+        // Add credits immediately for testing
+        const ref = 'SB' + Math.random().toString(36).slice(2, 7).toUpperCase();
+        S.fees[k]++;
+        S.fees.hist.unshift({d: TODAY, p: p.n, a: p.a, ref, st: 'Paid'});
+        S.allPay.unshift({u: S.user.name, p: p.n, a: p.a, d: TODAY, ref});
+        S.notes.unshift({
+          i: '💳',
+          m: `Payment of ${money(p.a)} received. Ref ${ref}.`,
+          w: 'Just now',
+          n: 1,
+          l: '#/app/fees'
+        });
+        alert(`TEST MODE: Payment simulation successful.\n\n${money(p.a)} credits added (Ref: ${ref})`);
+        re();
+      } else {
+        alert(`STK Push sent to ${phoneNumber}!\n\nEnter your PIN on your phone to complete payment.\n\nCredits will be added after payment confirmation.`);
+        S.modal = null;
+        re();
+      }
+    } else {
+      alert('Payment failed: ' + (data.error || 'Unknown error'));
+    }
+  } catch (error) {
+    console.error('Payment error:', error);
+    alert('Error connecting to payment server.\n\nMake sure your Node.js backend is running on port 3000.');
+  }
+},
+  
+  atab(v) {
+    S.adminTab = v;
+    re();
+  },
+  
+  uview(i) {
+    S.modal = {t: 'user', i: +i};
+    re();
+  },
+  
+  usr(i) {
+    const u = S.users[i];
+    u.s = u.s == 'Active' ? 'Suspended' : 'Active';
+    S.modal = null;
+    toast(`${u.n} ${u.s == 'Active' ? 'activated' : 'suspended'}`);
+    re();
+  },
+  
+  udel(i) {
+    if (confirm('Delete this user?')) {
+      S.users.splice(i, 1);
+      S.modal = null;
+      toast('User deleted');
+      re();
+    }
+  },
+  
+  askedit(i) {
+    const s = allSkills()[i];
+    const t = prompt('Edit listing title', s.t);
+    if (t && t.trim()) {
+      (s.own ? S.skills : S.adminSkills).find(k => k.id == s.id).t = t.trim();
+      toast('Listing updated');
+      re();
+    }
+  },
+  
+  askdel(i) {
+    const s = allSkills()[i];
+    if (s.own) S.skills = S.skills.filter(k => k.id != s.id);
+    else S.adminSkills = S.adminSkills.filter(k => k.id != s.id);
+    toast('Listing removed');
+    re();
+  },
+  
+  addcat() {
+    const n = $('#nc').value.trim();
+    if (!n) return toast('Enter a category name', 1);
+    if (S.cats.includes(n)) return toast('Category already exists', 1);
+    S.cats.push(n);
+    toast('Category added');
+    re();
+  },
+  
+  delcat(i) {
+    S.cats.splice(i, 1);
+    toast('Category deleted');
+    re();
+  },
+  
+  aodel(i) {
+    S.opps.splice(i, 1);
+    toast('Opportunity removed');
+    re();
+  },
+  
+  inv(i) {
+    S.modal = {t: 'inv', i: +i};
+    re();
+  },
+  
+  rres(i) {
+    S.reports[i].st = 'Resolved';
+    S.modal = null;
+    toast('Report resolved');
+    re();
+  },
+  
+  rdis(i) {
+    S.reports[i].st = 'Dismissed';
+    S.modal = null;
+    toast('Report dismissed');
+    re();
+  },
+  
+  rwarn(i) {
+    S.reports[i].st = 'Resolved';
+    S.modal = null;
+    toast('Warning sent to user');
+    re();
+  },
+  
+  rban(i) {
+    const r = S.reports[i];
+    r.st = 'Resolved';
+    const u = S.users.find(x => r.w.includes(x.n));
+    if (r.ty == 'User' && u) {
+      u.s = 'Suspended';
+      toast('User suspended');
+    } else {
+      const s = allSkills().find(x => r.w.includes(x.t));
+      if (s && !s.own) S.adminSkills = S.adminSkills.filter(k => k.id != s.id);
+      toast('Content removed');
+    }
+    S.modal = null;
+    re();
+  },
+  
+  fdis(i) {
+    S.flagged[i].st = 'Dismissed';
+    toast('Flag dismissed');
+    re();
+  },
+  
+  fdel(i) {
+    const m = S.flagged[i];
+    m.st = 'Actioned';
+    const u = S.users.find(x => x.n == m.f);
+    if (u) u.s = 'Suspended';
+    toast('Message deleted, sender suspended');
+    re();
+  },
+  
+  wav(v) {
+    S.wiz.avail = v;
+    re();
+  },
+  
+  wprev() {
+    S.step = Math.max(1, S.step - 1);
+    re();
+  },
+  
+  wnext() {
+    const w = S.wiz;
+    if (S.step == 1 && !w.bio.trim()) {
+      $('#e-bio').textContent = 'Please write a short bio';
+      return;
+    }
+    if (S.step == 2 && S.signRole != 'I need skills' && !w.skills.trim()) {
+      $('#e-skills').textContent = 'Add at least one skill';
+      return;
+    }
+    S.step++;
+    re();
+  },
+  
+  wdone() {
+    const w = S.wiz, u = S.user;
+    const AV = {'Full Time': 'Available', 'Part Time': 'Part-time', 'Weekends': 'Weekends', 'Not Available': 'Busy'};
+    
+    u.bio = w.bio.trim();
+    u.exp = w.exp;
+    u.edu = w.edu;
+    u.comm = w.comm;
+    u.role = S.signRole == 'I provide skills' ? 'Provider' : S.signRole == 'I need skills' ? 'Seeker' : 'Both';
+    S.portfolio = !!w.pf.trim();
+    
+    if (w.skills.trim() && u.role != 'Seeker') {
+      w.skills.split(',').map(x => x.trim()).filter(Boolean).forEach((t, i) => {
+        S.skills.push({
+          id: Date.now() + i,
+          t,
+          c: 'Other',
+          d: '',
+          ty: 'Remote',
+          exp: w.exp,
+          loc: u.loc,
+          av: AV[w.avail] || 'Available',
+          rate: '',
+          ct: w.comm,
+          v: 0,
+          r: 0,
+          st: 'Active'
+        });
+      });
+    }
+    
+    S.logged = true;
+    S.step = 1;
+    S.wiz = {bio: '', comm: 'Email', skills: '', exp: '1-3 years', edu: '', pf: '', avail: 'Full Time'};
+    toast('Profile created! Welcome to SkillBridge');
+    go('/app/dashboard');
+  },
+  
+  eye(v, t) {
+    const i = t.parentElement.querySelector('input');
+    i.type = i.type == 'password' ? 'text' : 'password';
+  }
+};
+
+/* ============ 11. EVENTS & FORMS ============ */
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-a]');
+  if (!t || t.tagName == 'SELECT') return;
+  A[t.dataset.a]?.(t.dataset.v, t, e);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key == 'Escape' && S.modal) {
+    S.modal = null;
+    re();
+  }
+});
+
+document.addEventListener('change', e => {
+  const t = e.target;
+  const d = t.dataset || {};
+  
+  if (t.tagName == 'SELECT' && d.a) {
+    A[d.a](d.v, t);
+    return;
+  }
+  
+  if (d.pref !== undefined) {
+    S.prefs[d.pref] = t.checked ? 1 : 0;
+    toast('Preference saved');
+    return;
+  }
+  
+  if (d.apref !== undefined) {
+    S.aprefs[d.apref] = t.checked ? 1 : 0;
+    toast('Setting saved');
+    return;
+  }
+  
+  if (d.photo !== undefined && t.files[0]) {
+    const f = t.files[0];
+    if (!f.type.startsWith('image/') || f.size > 5 * 1024 * 1024) {
+      toast('Choose a JPG or PNG under 5MB', 1);
+      return;
+    }
+    const r = new FileReader();
+    r.onload = () => {
+      S.user.photo = r.result;
+      document.querySelectorAll('[data-uav]').forEach(el => el.innerHTML = uavIn(+el.dataset.uav));
+      toast('Photo updated');
+    };
+    r.readAsDataURL(f);
+  }
+  
+  if (d.att !== undefined && t.files[0]) {
+    const f = t.files[0];
+    const now = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    if (f.size > 10 * 1024 * 1024) {
+      toast('File must be under 10MB', 1);
+      return;
+    }
+    S.chats[S.chat].push(['m', `📎 ${f.name} (${Math.max(1, Math.round(f.size/1024))} KB)`, now]);
+    re();
+  }
+});
+
+document.addEventListener('input', e => {
+  const t = e.target;
+  const d = t.dataset || {};
+  
+  if (d.in) {
+    S[d.in] = t.value;
+    const p = t.selectionStart;
+    re();
+    const n = document.querySelector(`[data-in=${d.in}]`);
+    if (n) {
+      n.focus();
+      n.setSelectionRange(p, p);
+    }
+  }
+  
+  if (d.pv) {
+    const el = $('#pv-' + d.pv);
+    if (el) el.textContent = t.value || el.dataset.ph || '';
+  }
+  
+  if (d.pw !== undefined) {
+    const p = t.value;
+    let n = 0;
+    if (p.length >= 8) n++;
+    if (/[A-Z]/.test(p) && /[a-z]/.test(p)) n++;
+    if (/\d/.test(p)) n++;
+    if (/[^A-Za-z0-9]/.test(p)) n++;
+    
+    const L = [['Weak password','#f43f5e',25],['Weak password','#f43f5e',25],['Fair password','#f59e0b',50],['Good password','#3b82f6',75],['Strong password','#10b981',100]][n];
+    const m = $('#pwm'), l = $('#pwl');
+    if (m && l) {
+      if (!p) {
+        m.style.width = '0';
+        l.textContent = '';
+      } else {
+        m.style.width = L[2] + '%';
+        m.style.background = L[1];
+        l.textContent = L[0];
+        l.style.color = L[1];
+      }
+    }
+  }
+  
+  if (d.w !== undefined) {
+    S.wiz[d.w] = t.value;
+  }
+});
+
+function showE(f, o) {
+  f.querySelectorAll('.err').forEach(x => x.textContent = '');
+  let ok = 1;
+  for (const k in o) {
+    if (o[k]) {
+      const el = f.querySelector('#e-' + k);
+      if (el) el.textContent = o[k];
+      ok = 0;
+    }
+  }
+  return ok;
+}
+
+document.addEventListener('submit', e => {
+  const f = e.target;
+  const k = f.dataset.f;
+  if (!k) return;
+  e.preventDefault();
+  
+  const v = n => f[n]?.value.trim();
+  const now = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+  
+  if (k == 'login') {
+    if (showE(f, {
+      email: !v('email') ? 'Email is required' : !mailOk(v('email')) ? 'Enter a valid email' : '',
+      pw: !v('pw') ? 'Password is required' : ''
+    })) {
+      root.innerHTML = '<div class="spin"></div>';
+      setTimeout(() => {
+        S.logged = true;
+        toast('Welcome back, ' + S.user.name.split(' ')[0]);
+        go('/app/dashboard');
+      }, 600);
+    }
+  }
+  
+  if (k == 'forgot') {
+    if (showE(f, {
+      email: !v('email') ? 'Email is required' : !mailOk(v('email')) ? 'Enter a valid email' : ''
+    })) {
+      $('#fg').innerHTML = `<div style="text-align:center"><div style="font-size:44px">✉</div><h2>Check your email</h2><p class="mu" style="margin-top:8px">If an account exists for ${esc(v('email'))}, a reset link is on its way.</p></div>`;
+    }
+  }
+  
+  if (k == 'contact') {
+    if (showE(f, {
+      name: !v('name') ? 'Name is required' : '',
+      email: !mailOk(v('email')) ? 'Enter a valid email' : '',
+      msg: v('msg').length < 10 ? 'Please write at least 10 characters' : ''
+    })) {
+      f.reset();
+      toast('Message sent. We will reply soon.');
+    }
+  }
+  
+  if (k == 'signup') {
+    if (!S.aprefs.reg) {
+      toast('Registrations are currently closed', 1);
+      return;
+    }
+    const pw = v('pw');
+    if (showE(f, {
+      name: !v('name') ? 'Full name is required' : '',
+      email: !v('email') ? 'Email is required' : !mailOk(v('email')) ? 'Enter a valid email' : '',
+      phone: !v('phone') ? 'Phone is required' : '',
+      loc: !v('loc') ? 'Location is required' : '',
+      pw: !pw ? 'Password is required' : !strong(pw) ? 'Weak password: use 8+ characters with letters and numbers' : '',
+      pw2: pw != v('pw2') ? 'Passwords do not match' : ''
+    })) {
+      Object.assign(S.user, {
+        name: v('name'),
+        email: v('email'),
+        phone: v('phone'),
+        loc: v('loc'),
+        role: S.signRole == 'I provide skills' ? 'Provider' : S.signRole == 'I need skills' ? 'Seeker' : 'Both',
+        bio: '',
+        photo: '',
+        joined: TODAY
+      });
+      
+      Object.assign(S, {
+        skills: [],
+        conns: [],
+        cdate: {},
+        inc: [],
+        sent: [],
+        svc: [],
+        chats: {},
+        unread: {},
+        chat: null,
+        mchat: false,
+        notes: [],
+        reviews: [],
+        given: [],
+        applied: [],
+        portfolio: false,
+        fees: {std: 1, prem: 0, hist: []}
+      });
+      
+      if (!S.users.some(u => u.n == S.user.name)) {
+        S.users.unshift({
+          n: S.user.name,
+          l: S.user.loc.split(',')[0],
+          r: S.user.role == 'Provider' ? 'Provider' : S.user.role == 'Seeker' ? 'Seeker' : 'Both',
+          s: 'Active',
+          j: TODAY
+        });
+      }
+      
+      toast('Account created! 1 free connection credit added.');
+      go('/setup');
+    }
+  }
+  
+  if (k == 'admin') {
+    if (v('email') == 'admin@skillbridge.com' && v('pw') == 'Admin@123') {
+      S.admin = true;
+      go('/admin');
+    } else {
+      showE(f, {pw: 'Invalid admin credentials'});
+    }
+  }
+  
+  if (k == 'search') {
+    S.q = $('#q').value;
+    re();
+    $('#q')?.focus();
+  }
+  
+  if (k == 'offer') {
+    saveSkill(f, 'Active');
+  }
+  
+  if (k == 'send') {
+    const i = $('#mi');
+    const t = i.value.trim();
+    if (!t) return;
+    const id = S.chat;
+    S.chats[id].push(['m', t, now]);
+    re();
+    $('#mi')?.focus();
+    
+    setTimeout(() => {
+      S.chats[id].push(['t', 'Thanks for your message! I will reply shortly.', now]);
+      if (location.hash == '#/app/messages' && S.chat == id && !S.modal) {
+        const cur = $('#mi')?.value || '';
+        re();
+        const n = $('#mi');
+        if (n) {
+          n.value = cur;
+          n.focus();
+        }
+      } else {
+        S.unread[id] = (S.unread[id] || 0) + 1;
+      }
+    }, 1200);
+  }
+  
+  if (k == 'review') {
+    if (showE(f, {
+      to: !v('to') ? 'Choose who you are reviewing' : '',
+      r: !S.star ? 'Please select a rating' : '',
+      t: v('t').length < 10 ? 'Please write at least 10 characters' : ''
+    })) {
+      S.given.unshift({
+        to: v('to'),
+        d: TODAY,
+        s: v('s') || 'General',
+        r: S.star,
+        t: v('t')
+      });
+      S.rtab = 'out';
+      toast('Thanks for your feedback!');
+      re();
+    }
+  }
+  
+  if (k == 'settings') {
+    if (showE(f, {
+      name: !v('name') ? 'Name is required' : ''
+    })) {
+      Object.assign(S.user, {
+        name: v('name'),
+        loc: v('loc'),
+        phone: v('phone'),
+        website: v('web'),
+        bio: v('bio')
+      });
+      toast('Settings saved');
+      re();
+    }
+  }
+  
+  if (k == 'pw') {
+    const np = v('np');
+    if (showE(f, {
+      cur: !v('cur') ? 'Enter your current password' : '',
+      np: !strong(np || '') ? 'Use 8+ characters with letters and numbers' : '',
+      np2: np != v('np2') ? 'Passwords do not match' : ''
+    })) {
+      f.reset();
+      toast('Password updated');
+    }
+  }
+  
+  if (k == 'postopp') {
+    if (showE(f, {
+      t: !v('t') ? 'Title is required' : '',
+      s: !v('s') ? 'Required skill is needed' : '',
+      dl: !v('dl') ? 'Choose a deadline' : '',
+      d: v('d').length < 10 ? 'Add a short description' : ''
+    })) {
+      S.opps.unshift({
+        id: Date.now(),
+        t: v('t'),
+        o: S.user.name,
+        s: v('s'),
+        k: v('k'),
+        l: v('l') || 'Remote',
+        dl: v('dl'),
+        pay: v('pay') || 'Negotiable',
+        d: v('d'),
+        st: 'Open'
+      });
+      S.selOpp = S.opps[0].id;
+      done('🎯', 'Opportunity posted', 'Your opportunity is now visible to skilled people on SkillBridge.', [['View opportunity', '#/app/opportunities'], ['Close', null]]);
+    }
+  }
+  
+  if (k == 'applysend') {
+    if (showE(f, {
+      m: v('m').length < 10 ? 'Please write at least 10 characters' : ''
+    })) {
+      const o = S.opps.find(x => x.id == S.modal.id);
+      S.applied.push(o.id);
+      S.notes.unshift({
+        i: '💼',
+        m: 'Your application was sent: ' + o.t,
+        w: 'Just now',
+        n: 1,
+        l: '#/app/opportunities'
+      });
+      done('✓', 'Application sent!', `${esc(o.o)} will be notified and can contact you through SkillBridge.`, [['Browse more', '#/app/opportunities'], ['Close', null]]);
+    }
+  }
+  
+  if (k == 'connectsend') {
+    const p = prov(S.modal.id);
+    const plan = v('plan');
+    if (S.fees[plan] <= 0) {
+      toast('No credits for this plan', 1);
+      return;
+    }
+    S.fees[plan]--;
+    S.sent.push({
+      id: p.id,
+      m: (plan == 'prem' ? '★ Premium request: ' : '') + (v('m') || `Hi ${p.n.split(' ')[0]}, I'd like to connect.`),
+      d: TODAY
+    });
+    S.tab = 'out';
+    simAccept(p.id);
+    done('➤', 'Request sent!', `Your ${PLANS[plan].n} request was sent to ${esc(p.n)}. Credits left: ${S.fees.std + S.fees.prem}. You will be notified when they respond.`, [['View Requests', '#/app/requests'], ['Keep exploring', null]]);
+  }
+  
+  if (k == 'svcsend') {
+    if (showE(f, {
+      d: v('d').length < 10 ? 'Please describe what you need' : ''
+    })) {
+      const p = prov(S.modal.id);
+      S.svc.push({to: p.n, d: TODAY});
+      S.notes.unshift({
+        i: '🛎',
+        m: `Service request sent to ${p.n}.`,
+        w: 'Just now',
+        n: 1,
+        l: '#/app/requests'
+      });
+      done('🛎', 'Service request sent', `${esc(p.n)} will review your request and reply.`, [['Close', null]]);
+    }
+  }
+  
+  if (k == 'reportsend') {
+    if (showE(f, {
+      d: v('d').length < 5 ? 'Please add a few details' : ''
+    })) {
+      const p = prov(S.modal.id);
+      S.reports.push({
+        id: Date.now(),
+        w: p.n,
+        ty: 'User',
+        why: v('why'),
+        by: S.user.name,
+        d: TODAY,
+        st: 'Open',
+        det: v('d')
+      });
+      done('🛡', 'Report submitted', 'Thank you. Our admins will investigate and take action if needed.', [['Close', null]]);
+    }
+  }
+  
+  if (k == 'pay') {
+    const ph = f.phone.value.replace(/\s/g, '');
+    if (!/^(\+254|254|0)?[17]\d{8}$/.test(ph)) {
+      f.querySelector('#e-phone').textContent = 'Enter a valid M-Pesa number';
+      return;
+    }
+    const pk = S.modal.k;
+    const p = PLANS[pk];
+    const b = f.querySelector('button.btn:not(.o)');
+    b.disabled = true;
+    b.textContent = 'Waiting for M-Pesa PIN…';
+    
+    setTimeout(() => {
+      const ref = 'SB' + Math.random().toString(36).slice(2, 7).toUpperCase();
+      S.fees[pk]++;
+      S.fees.hist.unshift({d: TODAY, p: p.n, a: p.a, ref, st: 'Paid'});
+      S.allPay.unshift({u: S.user.name, p: p.n, a: p.a, d: TODAY, ref});
+      
+      S.notes.unshift({
+        i: '💳',
+        m: `Payment of ${money(p.a)} received. Ref ${ref}.`,
+        w: 'Just now',
+        n: 1,
+        l: '#/app/fees'
+      });
+      
+      if (S.modal && S.modal.t == 'pay') {
+        done('💳', 'Payment successful', `${money(p.a)} received (ref ${ref}). 1 ${p.n} credit added.`, [['Find a skill', '#/app/find'], ['Close', null]]);
+      } else {
+        toast('Payment successful');
+      }
+    }, 1800);
+  }
+  
+  if (k == 'afees') {
+    const s = +v('std'), p = +v('prem');
+    if (showE(f, {
+      std: !(s > 0 && p > 0) ? 'Enter valid amounts greater than 0' : ''
+    })) {
+      PLANS.std.a = s;
+      PLANS.prem.a = p;
+      toast('Fees updated');
+    }
+  }
+});
+
+/* ============ 12. DECORATION ============ */
+let lastH = null;
+
+function decorate() {
+  const h = location.hash || '#/';
+  if (h === lastH) return;
+  lastH = h;
+  
+  root.classList.add('enter');
+  setTimeout(() => root.classList.remove('enter'), 700);
+  
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const to = +el.dataset.count;
+    const suf = el.dataset.suf || '';
+    if (isNaN(to)) return;
+    const t0 = performance.now();
+    const tick = n => {
+      const k = Math.min(1, (n - t0) / 1000);
+      const e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(to * e).toLocaleString('en-US') + suf;
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+  
+  const rv = document.querySelectorAll('.rv');
+  if (!rv.length) return;
+  
+  if (!('IntersectionObserver' in window)) {
+    rv.forEach(x => x.classList.remove('rv'));
+    return;
+  }
+  
+  const io = new IntersectionObserver(es => {
+    es.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+        setTimeout(() => {
+          en.target.classList.remove('rv', 'in');
+          en.target.style.transitionDelay = '';
+        }, 1100);
+      }
+    });
+  }, {threshold: .1});
+  
+  rv.forEach((x, i) => {
+    x.style.transitionDelay = (i % 4) * 80 + 'ms';
+    io.observe(x);
+  });
+}
+
+// Initialize
+render();
+
+
+// Intercept signup
+document.addEventListener('submit', e => {
+    const f = e.target;
+    if (f.dataset.f !== 'signup') return;
+    e.preventDefault();
+    
+    const v = n => f[n]?.value.trim();
+    
+    if (window.DB) {
+        window.DB.register({
+            name: v('name'),
+            email: v('email'),
+            phone: v('phone'),
+            password: v('pw'),
+            password2: v('pw2'),
+            role: S.signRole,
+            location: v('loc')
+        }).then(result => {
+            if (result.success) {
+                alert('Account created! Please login.');
+                window.location.hash = '#/login';
+            } else {
+                alert(result.error);
+            }
+        });
+    }
+});
+
+// Add this function to your skillbridge.html JavaScript section
+async function handlePayment(amount, description) {
+    // 1. Get User Phone Number (You MUST have an input for this)
+    // If you don't have a phone input on this page, you must add one or get it from user profile
+    const phoneNumber = prompt("Enter your phone number to pay (e.g., 0712345678):");
+    
+    if (!phoneNumber) {
+        alert("Payment cancelled. Phone number is required.");
+        return;
+    }
+
+    // 2. Get User ID (Assuming you store this in localStorage after login)
+    const userId = localStorage.getItem('userId'); 
+    if (!userId) {
+        alert("Error: User not logged in.");
+        return;
+    }
+
+    // 3. Send Request to Your Backend
+    try {
+        const response = await fetch('http://localhost:3000/api/payment/initiate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                amount: amount,
+                phoneNumber: phoneNumber,
+                accountReference: description
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            if (data.isSimulation) {
+                alert("SIMULATION: Payment request received. In a real environment, you would receive a PIN prompt now.");
+            } else {
+                alert("STK Push sent! Check your phone to enter your PIN.");
+            }
+            // Refresh page or update UI
+            window.location.reload();
+        } else {
+            alert("Payment failed: " + (data.error || "Unknown error"));
+        }
+    } catch (error) {
+        console.error('Payment error:', error);
+        alert("Error connecting to payment server. Is the backend running?");
+    }
+}
+
+</script>
+<script src="database.js"></script>
+</body>
+</html>
